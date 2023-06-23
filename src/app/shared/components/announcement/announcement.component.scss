@@ -1,0 +1,15 @@
+.sale_header {
+  background-color: #347d6c;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  a {
+    color: var(--whiteColor);
+    font-size: 13px;
+    // text-decoration: underline;
+    b {
+      font-weight: 900;
+    }
+  }
+}

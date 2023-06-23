@@ -1,1 +1,111 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "primeicons/primeicons.css";
+
+:root {
+  --fontFamily: "Lato", sans-serif;
+  --headingFontFamily: "Lora", serif;
+  --primaryColor: #195a87;
+  --primaryColor2: #25283a;
+  --secondaryColor: #f3902e;
+  --paragraphColor: #696969;
+  --bgPrimaryColor: #eeefee;
+  --whiteColor: #ffffff;
+  --blackColor: #2f3045;
+  --transition: 0.5s;
+  --fontSize: 16px;
+}
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--blackColor);
+  font: {
+    size: var(--fontSize);
+    family: var(--fontFamily);
+  }
+}
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--blackColor);
+  font: {
+    weight: 700;
+    family: var(--headingFontFamily);
+  }
+}
+
+// Default Btn
+.default-btn {
+  border: 1px solid var(--primaryColor);
+  box-shadow: unset;
+  text-align: center;
+  padding: 10px 25px;
+  border-radius: 5px;
+  display: inline-block;
+  color: var(--whiteColor);
+  transition: var(--transition);
+  background-color: var(--primaryColor);
+  cursor: pointer;
+
+  font: {
+    weight: 600;
+    size: var(--fontSize);
+  }
+  &:hover {
+    color: var(--primaryColor);
+    background-color: aliceblue;
+  }
+}
+
+.default-btn-2 {
+  border: 1px solid var(--primaryColor);
+  box-shadow: unset;
+  text-align: center;
+  padding: 10px 25px;
+  border-radius: 5px;
+  display: inline-block;
+  color: black;
+  transition: var(--transition);
+  background-color: aliceblue;
+  opacity: 0.7;
+  cursor: pointer;
+  font: {
+    weight: 600;
+    size: var(--fontSize);
+  }
+  &:hover {
+    color: white;
+    background-color: var(--primaryColor);
+    opacity: 1;
+  }
+}
+
+// scrollBar manipulation
+// width
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--paragraphColor);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
