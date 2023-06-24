@@ -1,1 +1,92 @@
-<p>checkout works!</p>
+<div class="px-7 py-3 ">
+  <h2 class="text-center">
+    <!-- <span class="pi pi-shopping-bag text-2xl cursor-pointer"></span> -->
+    Checkout
+  </h2>
+  <form class="grid" [formGroup]="userForm">
+    <div class="lg:col-7 md:col-7 col-12 p-3 ">
+      <div class="h-full w-full border-1 border-round-lg p-4">
+        <h1 class="text-center">Shipping Address</h1>
+        <div class="grid">
+          <div class="p-2 md:col-6 col-12">
+            <label for="">First Name</label>
+            <input type="text" placeholder="Jeewan" formControlName="firstName"
+              class="p-3 w-full border-1 border-round mt-1">
+          </div>
+          <div class="p-2 md:col-6 col-12">
+            <label for="">Last Name</label>
+            <input type="text" placeholder="Sharma" formControlName="lastName"
+              class="p-3 w-full border-1 border-round mt-1">
+          </div>
+        </div>
+        <div class="grid">
+          <div class="p-2 md:col-6 col-12">
+            <label for="">Address 1</label>
+            <input type="text" placeholder="2244, Ithari-2, Shantinagar" formControlName="address_1"
+              class="p-3 w-full border-1 border-round mt-1">
+          </div>
+          <div class="p-2 md:col-6 col-12">
+            <label for="">Address 2</label>
+            <input type="text" placeholder="3251, Itahari-1, Birendra Chowk" formControlName="address_2"
+              class="p-3 w-full border-1 border-round mt-1">
+          </div>
+        </div>
+        <div class="grid">
+          <div class="p-2 md:col-6 col-12">
+            <label for="">City</label>
+            <input type="text" placeholder="Itahari" formControlName="city"
+              class="p-3 w-full border-1 border-round mt-1">
+          </div>
+          <div class="p-2 md:col-6 col-12">
+            <label for="">Zip Code</label>
+            <input type="text" placeholder="2266" formControlName="zipCode"
+              class="p-3 w-full border-1 border-round mt-1">
+          </div>
+        </div>
+        <div class="grid">
+          <div class="p-2 md:col-6 col-12">
+            <label for="">Phone</label>
+            <input type="text" placeholder="98XXXXXXXX" formControlName="phone"
+              class="p-3 w-full border-1 border-round mt-1">
+          </div>
+          <div class="p-2 md:col-6 col-12">
+            <label for="">Email</label>
+            <input type="email" placeholder="Jeewan@jeewan.com" formControlName="email"
+              class="p-3 w-full border-1 border-round mt-1">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lg:col-5 md:col-5 col-12 p-3">
+      <div class="h-full w-full border-1 border-round-lg p-4">
+        <h1 class="text-center">Payment</h1>
+        <div class="p-2 ">
+          <label for="">Name of Bank</label>
+          <input type="email" placeholder="Nabil Bank Limited" formControlName="bankName"
+            class="p-3 w-full border-1 border-round mt-1">
+        </div>
+        <div class="p-2 ">
+          <label for="">Branch Name</label>
+          <input type="email" placeholder="Itahari" formControlName="branchName"
+            class="p-3 w-full border-1 border-round mt-1">
+        </div>
+        <div class="p-2 ">
+          <label for="">Visa Card Number</label>
+          <input type="email" placeholder="66XXXXXXXXXXXXXX" formControlName="cardNumber"
+            class="p-3 w-full border-1 border-round mt-1">
+        </div>
+        <div class="p-2 ">
+          <label for="">CVC</label>
+          <input type="email" placeholder="XXX" formControlName="cvcNumber"
+            class="p-3 w-full border-1 border-round mt-1">
+        </div>
+      </div>
+    </div>
+
+  </form>
+  <div class="flex justify-content-end mt-3 ">
+    <div>
+      <a (click)="submitForm()" class="default-btn"> Checkout </a>
+    </div>
+  </div>
+</div>

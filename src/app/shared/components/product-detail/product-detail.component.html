@@ -8,7 +8,7 @@
     <div class="col-12 md:col-6 lg:col-6 pl-3 text-left">
       <h2>Product Title: {{product.title}}</h2>
       <h5>Category: {{product.category}}</h5>
-      <h3>Price: Rs. {{product.price}}</h3>
+      <h3>Price: {{product.price | currency:'Rs. '}}</h3>
       <h5>Ratings : {{product.rating.rate}}</h5>
       <p>Availability: <span class="text-green-400">In Stock</span></p>
       <h4>Description:</h4>
@@ -22,7 +22,7 @@
 
           </div>
         </div> -->
-      <button class="default-btn-2">Add to Cart</button>
+      <button (click)="addToCart()" class="default-btn-2">Add to Cart</button>
     </div>
   </div>
 

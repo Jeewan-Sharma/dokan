@@ -18,13 +18,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/cart/cart.module').then((m) => m.CartModule),
       },
-      {
-        path: 'check-out',
-        loadChildren: () =>
-          import('./pages/checkout/checkout.module').then(
-            (m) => m.CheckoutModule
-          ),
-      },
+
       { path: '**', redirectTo: 'home', pathMatch: 'full' },
     ],
   },

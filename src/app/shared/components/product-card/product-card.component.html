@@ -1,6 +1,6 @@
 <div class="custom_card">
   <div class="img" [ngStyle]="{'background-image': 'url(' + product.image + ')'}">
-    <button class="default-btn btn-hover">
+    <button (click)="addToCart()" class="default-btn btn-hover">
       <i class="bi bi-cart4"></i> Add to Cart
     </button>
     <button (click)="showDialog()" class="default-btn btn-hover">
@@ -9,7 +9,7 @@
   </div>
   <div class="disc">
     <h4>{{product.title}}</h4>
-    <p>Price: Rs {{product.price}}</p>
+    <p>Price: {{product.price | currency:'Rs. '}}</p>
   </div>
 </div>
 

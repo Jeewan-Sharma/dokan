@@ -12,6 +12,8 @@
   --bgPrimaryColor: #eeefee;
   --whiteColor: #ffffff;
   --blackColor: #2f3045;
+  --redColor: #e74646;
+  --lightRedColor: #fa9884;
   --transition: 0.5s;
   --fontSize: 16px;
 }
@@ -86,6 +88,27 @@ h6 {
     color: white;
     background-color: var(--primaryColor);
     opacity: 1;
+  }
+}
+
+.delete-btn {
+  border: 1px solid var(--redColor);
+  box-shadow: unset;
+  text-align: center;
+  padding: 10px 25px;
+  border-radius: 5px;
+  display: inline-block;
+  color: var(--whiteColor);
+  transition: var(--transition);
+  background-color: var(--redColor);
+  cursor: pointer;
+
+  font: {
+    weight: 600;
+    size: var(--fontSize);
+  }
+  &:hover {
+    background-color: var(--lightRedColor);
   }
 }
 
