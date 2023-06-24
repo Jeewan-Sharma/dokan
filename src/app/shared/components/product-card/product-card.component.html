@@ -1,5 +1,5 @@
 <div class="custom_card">
-  <div class="img">
+  <div class="img" [ngStyle]="{'background-image': 'url(' + product.image + ')'}">
     <button class="default-btn btn-hover">
       <i class="bi bi-cart4"></i> Add to Cart
     </button>
@@ -8,7 +8,7 @@
     </button>
   </div>
   <div class="disc">
-    <h4>Long Furred Coat</h4>
-    <p>Rs. 8999</p>
+    <h4>{{product.title}}</h4>
+    <p>Price: Rs {{product.price}}</p>
   </div>
 </div>

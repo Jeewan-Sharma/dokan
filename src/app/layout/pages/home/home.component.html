@@ -7,7 +7,7 @@
       <button class="default-btn">Explore Now <i class="pi pi-caret-right"></i></button>
     </div>
     <div class="col-12 md:col-5 lg:col-5 d-flex align-items-start pt-4">
-      <img src="/assets/images/modals/lady.png" alt="lady" class="image">
+      <img src="/assets/images/modals/lady.png" alt="lady" class=" image">
     </div>
   </div>
 </div>
@@ -67,15 +67,11 @@
         Top in this week
       </i>
     </p>
-    <div class="grid border-solid border-round-md border-300 p-3 ">
-      <app-product-card class="md:col-6 lg:col-3 flex justify-content-center"></app-product-card>
-      <app-product-card class="md:col-6 lg:col-3 flex justify-content-center"></app-product-card>
-      <app-product-card class="md:col-6 lg:col-3 flex justify-content-center"></app-product-card>
-      <app-product-card class="md:col-6 lg:col-3 flex justify-content-center"></app-product-card>
-      <app-product-card class="md:col-6 lg:col-3 flex justify-content-center"></app-product-card>
-      <app-product-card class="md:col-6 lg:col-3 flex justify-content-center"></app-product-card>
-
-
+    <div class="border-solid border-round-md border-300 p-3 ">
+      <div class="grid">
+        <app-product-card *ngFor="let product of products" class="md:col-6 lg:col-3 flex justify-content-center"
+          [product]="product"></app-product-card>
+      </div>
     </div>
   </div>
   <!--  -->
