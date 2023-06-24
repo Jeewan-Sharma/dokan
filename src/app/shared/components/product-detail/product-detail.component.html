@@ -13,16 +13,17 @@
       <p>Availability: <span class="text-green-400">In Stock</span></p>
       <h4>Description:</h4>
       <p>{{product.description}} </p>
-      <!-- <div class="grid">
-        <div class="col-6">
 
-          <input type="number" placeholder="2">
+      <div class="flex align-items-center">
+        <div [formGroup]="quantityForm" class="p-2 flex gap-1 align-items-center">
+          <label for="">Qty: </label>
+          <input type="number" placeholder="XXX" formControlName="quantity"
+            class="p-3 w-4 border-1 border-round mt-1 text-center">
         </div>
-          <div class="col-6">
-
-          </div>
-        </div> -->
-      <button (click)="addToCart()" class="default-btn-2">Add to Cart</button>
+        <div class="p-2">
+          <button (click)="addToCart()" class="default-btn-2">Add to Cart</button>
+        </div>
+      </div>
     </div>
   </div>
 

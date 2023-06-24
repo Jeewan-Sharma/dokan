@@ -13,6 +13,7 @@
           <th>Image</th>
           <th>Price</th>
           <th>Qty</th>
+          <th>Total</th>
           <th></th>
         </tr>
       </ng-template>
@@ -21,19 +22,24 @@
           <td>{{product.title}}</td>
           <td><img [src]="product.image" [alt]="product.name" width="100" class="shadow-4" /></td>
           <td>{{product.price | currency:'Rs. '}}</td>
-          <td>1</td>
+          <td>{{product.quantity}}</td>
+          <td>{{product.price * product.quantity | currency:'Rs. '}}</td>
           <td><button (click)="removeFromCart(product)" class="delete-btn">Delete</button></td>
         </tr>
       </ng-template>
     </p-table>
   </div>
+
+  <div *ngIf="products.length <= 0">
+    <h1 routerLink="home" class="text-center text-pink-600 cursor-pointer"> No products Here Add From Home</h1>
+  </div>
+
   <div class="flex flex-column text-right px-6 mt-3">
-    <h3>Total Sum : 500</h3>
-    <h3>Discount : 10</h3>
-    <h3>Grand Total : 490</h3>
+    <h3>Total Sum : {{sum.toFixed(2)}}</h3>
+    <h3>Discount (20%) : {{(sum*20/100).toFixed(2)}}</h3>
+    <h3>Grand Total : {{(sum - sum*20/100).toFixed(2)}}</h3>
   </div>
   <div class="flex justify-content-end mt-3 ">
-
     <div>
       <a routerLink="check-out" class="default-btn"> Proceed to Checkout </a>
     </div>

@@ -16,6 +16,14 @@ export class ProductCardComponent {
     this.visible = true;
   }
   public addToCart() {
-    this.cartService.addToCart(this.product);
+    let data = {
+      id: this.product.id,
+      title: this.product.title,
+      image: this.product.image,
+      price: this.product.price,
+      quantity: 1,
+    };
+    console.log(data);
+    this.cartService.addToCart(data);
   }
 }

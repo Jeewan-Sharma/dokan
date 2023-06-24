@@ -5,6 +5,7 @@ import { UnderDevelopmentComponent } from './components/under-development/under-
 import { AnnouncementComponent } from './components/announcement/announcement.component';
 import { DialogModule } from 'primeng/dialog';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -12,13 +13,13 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
     UnderDevelopmentComponent,
     AnnouncementComponent,
     ProductDetailComponent,
-    // SearchFilterPipe,
   ],
-  imports: [CommonModule, DialogModule],
+  imports: [CommonModule, DialogModule, ReactiveFormsModule],
   exports: [
     ProductCardComponent,
     UnderDevelopmentComponent,
     AnnouncementComponent,
+    ProductDetailComponent,
   ],
 })
 export class SharedModule {}
