@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="grid align-items-center">
+    <div class="col-12 md:col-6 lg:col-6">
+      <div class="h-25rem border-solid p-3 flex justify-content-center overflow-hidden">
+        <img src={{product.image}} alt="Product Image" class=" h-11">
+      </div>
+    </div>
+    <div class="col-12 md:col-6 lg:col-6 pl-3 text-left">
+      <h2>Product Title: {{product.title}}</h2>
+      <h5>Category: {{product.category}}</h5>
+      <h3>Price: Rs. {{product.price}}</h3>
+      <h5>Ratings : {{product.rating.rate}}</h5>
+      <p>Availability: <span class="text-green-400">In Stock</span></p>
+      <h4>Description:</h4>
+      <p>{{product.description}} </p>
+      <!-- <div class="grid">
+        <div class="col-6">
+
+          <input type="number" placeholder="2">
+        </div>
+          <div class="col-6">
+
+          </div>
+        </div> -->
+      <button class="default-btn-2">Add to Cart</button>
+    </div>
+  </div>
+
+</div>

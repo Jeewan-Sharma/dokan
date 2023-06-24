@@ -8,4 +8,9 @@ import { Product } from '../../models/product.models';
 })
 export class ProductCardComponent {
   @Input() product!: Product;
+
+  public visible: boolean = false;
+  showDialog() {
+    this.visible = true;
+  }
 }

@@ -3,7 +3,7 @@
     <button class="default-btn btn-hover">
       <i class="bi bi-cart4"></i> Add to Cart
     </button>
-    <button class="default-btn btn-hover">
+    <button (click)="showDialog()" class="default-btn btn-hover">
       <i class="bi bi-ticket-detailed"></i> View Details
     </button>
   </div>
@@ -12,3 +12,7 @@
     <p>Price: Rs {{product.price}}</p>
   </div>
 </div>
+
+<p-dialog header="Product Details" [(visible)]="visible" [style]="{width: '95vw' , height:'95vh'} " class="test1">
+  <app-product-detail [product]="product"></app-product-detail>
+</p-dialog>

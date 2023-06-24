@@ -8,7 +8,6 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: '**', redirectTo: 'home', pathMatch: 'full' },
       {
         path: 'home',
         loadChildren: () =>
@@ -26,6 +25,7 @@ const routes: Routes = [
             (m) => m.CheckoutModule
           ),
       },
+      { path: '**', redirectTo: 'home', pathMatch: 'full' },
     ],
   },
 ];

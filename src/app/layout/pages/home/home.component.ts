@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { Product } from 'src/app/shared/models/product.models';
-import { SearchFilterPipe } from 'src/app/shared/pipe/search-filter.pipe';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +10,7 @@ import { SearchFilterPipe } from 'src/app/shared/pipe/search-filter.pipe';
 export class HomeComponent implements OnInit {
   public products!: Product[];
   public searchTerm: string = '';
+  public visible: boolean = false;
 
   constructor(private product: ProductService) {}
   ngOnInit() {
@@ -18,5 +18,8 @@ export class HomeComponent implements OnInit {
       this.products = response;
       console.log(this.products);
     });
+  }
+  showDialog() {
+    this.visible = true;
   }
 }
