@@ -113,3 +113,11 @@
     text-align: center;
   }
 }
+
+@media (max-width: 767px) {
+  /* CSS styles for mobile screens */
+  /* Place your mobile-specific styles here */
+  .myCategories {
+    display: none;
+  }
+}

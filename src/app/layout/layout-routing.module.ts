@@ -8,6 +8,7 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: '**', redirectTo: 'home', pathMatch: 'full' },
       {
         path: 'home',
         loadChildren: () =>
@@ -23,13 +24,6 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/checkout/checkout.module').then(
             (m) => m.CheckoutModule
-          ),
-      },
-      {
-        path: 'product-detail',
-        loadChildren: () =>
-          import('./pages/product-detail/product-detail.module').then(
-            (m) => m.ProductDetailModule
           ),
       },
     ],
