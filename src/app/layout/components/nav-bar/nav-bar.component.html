@@ -1,7 +1,10 @@
 <div class="card">
   <p-menubar [model]="items">
     <ng-template pTemplate="start">
-      <img src="/assets/images/logo/logo_shop.png" height="60" class="mr-2" />
+      <a routerLink="/home">
+
+        <img src="/assets/images/logo/logo_shop.png" height="60" class="mr-2" />
+      </a>
     </ng-template>
     <ng-template pTemplate="end">
       <a routerLink="cart" class="pr-5 ">

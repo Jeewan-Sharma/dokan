@@ -1,11 +1,11 @@
-<div class="px-7 py-3 ">
+<div class="sm:px-3 lg:px-7 md:px-4 py-3 customBg ">
   <h2 class="text-center">
-    <!-- <span class="pi pi-shopping-bag text-2xl cursor-pointer"></span> -->
+    <i class="pi pi-sign-out text-2xl cursor-pointer"></i>
     Checkout
   </h2>
   <form class="grid" [formGroup]="userForm">
     <div class="lg:col-7 md:col-7 col-12 p-3 ">
-      <div class="h-full w-full border-1 border-round-lg p-4">
+      <div class="h-full w-full border-round-lg p-4 customBgWhite">
         <h1 class="text-center">Shipping Address</h1>
         <div class="grid">
           <div class="p-2 md:col-6 col-12">
@@ -22,27 +22,16 @@
         <div class="grid">
           <div class="p-2 md:col-6 col-12">
             <label for="">Address 1</label>
-            <input type="text" placeholder="2244, Ithari-2, Shantinagar" formControlName="address_1"
+            <input type="text" placeholder="2244, Ithari-2, Shantinagar" formControlName="address1"
               class="p-3 w-full border-1 border-round mt-1">
           </div>
           <div class="p-2 md:col-6 col-12">
             <label for="">Address 2</label>
-            <input type="text" placeholder="3251, Itahari-1, Birendra Chowk" formControlName="address_2"
+            <input type="text" placeholder="3251, Itahari-1, Birendra Chowk" formControlName="address2"
               class="p-3 w-full border-1 border-round mt-1">
           </div>
         </div>
-        <div class="grid">
-          <div class="p-2 md:col-6 col-12">
-            <label for="">City</label>
-            <input type="text" placeholder="Itahari" formControlName="city"
-              class="p-3 w-full border-1 border-round mt-1">
-          </div>
-          <div class="p-2 md:col-6 col-12">
-            <label for="">Zip Code</label>
-            <input type="text" placeholder="2266" formControlName="zipCode"
-              class="p-3 w-full border-1 border-round mt-1">
-          </div>
-        </div>
+
         <div class="grid">
           <div class="p-2 md:col-6 col-12">
             <label for="">Phone</label>
@@ -58,18 +47,14 @@
       </div>
     </div>
     <div class="lg:col-5 md:col-5 col-12 p-3">
-      <div class="h-full w-full border-1 border-round-lg p-4">
+      <div class="h-full w-full border-round-lg p-4 customBgWhite">
         <h1 class="text-center">Payment</h1>
         <div class="p-2 ">
           <label for="">Name of Bank</label>
           <input type="email" placeholder="Nabil Bank Limited" formControlName="bankName"
             class="p-3 w-full border-1 border-round mt-1">
         </div>
-        <div class="p-2 ">
-          <label for="">Branch Name</label>
-          <input type="email" placeholder="Itahari" formControlName="branchName"
-            class="p-3 w-full border-1 border-round mt-1">
-        </div>
+
         <div class="p-2 ">
           <label for="">Visa Card Number</label>
           <input type="email" placeholder="66XXXXXXXXXXXXXX" formControlName="cardNumber"
@@ -84,9 +69,90 @@
     </div>
 
   </form>
-  <div class="flex justify-content-end mt-3 ">
+  <div class="flex justify-content-end mt-3">
     <div>
-      <a (click)="submitForm()" class="default-btn"> Checkout </a>
+      <a (click)="showDialog()" class="default-btn">
+        Checkout </a>
     </div>
   </div>
 </div>
+
+
+<p-dialog header="Checkout Summary" [(visible)]="visible" [style]="{width:'90%' }">
+  <div class="grid">
+    <div class="lg:col-9 md:col-12 col-12">
+      <div class=" border-1 customBorder border-round-lg p-3 my-1">
+        <h3>Transaction Summary</h3>
+        <!--  -->
+        <p-table [value]="products" [tableStyle]="{'min-width': '60vw'}">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Title</th>
+              <th>Qty</th>
+              <th>Total</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-product>
+            <tr>
+              <td>{{product.title}}</td>
+              <td>{{product.quantity}}</td>
+              <td>{{product.price * product.quantity | currency:'Rs. '}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <!--  -->
+        <div class="grid">
+          <div class="col-3 lg:col-8"></div>
+          <div class="col-9 lg:col-4 flex flex-column text-left px-6 mt-3  border-1 customBorder border-round-lg">
+            <p><b>Sub Total :</b> {{sum.toFixed(2)}}</p>
+            <p><b>TAX (20%) :</b> {{(sum*20/100).toFixed(2)}}</p>
+            <p><b>Grand Total :</b> {{(sum + sum*20/100).toFixed(2)}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lg:col-3 md:col-12 col-12">
+      <div class=" border-1 customBorder border-round-lg p-3 my-1">
+        <!--  -->
+        <div class="grid">
+          <div class="md:col-6 lg:col-12 col-12">
+            <h3>Shipping Address</h3>
+            <p>
+              <b>Name :</b> {{this.userForm.value['firstName']}} {{this.userForm.value['lastName']}}
+            </p>
+            <p>
+              <b>Phone :</b> {{this.userForm.value['phone']}}
+            </p>
+            <p>
+              <b>Email :</b> {{this.userForm.value['email']}}
+            </p>
+            <p>
+              <b>Address 1 :</b> {{this.userForm.value['address1']}}
+            </p>
+            <p>
+              <b>Address 2 :</b> {{this.userForm.value['address2']}}
+            </p>
+          </div>
+          <!--  -->
+          <div class="md:col-6 lg:col-12 col-12">
+
+            <h3>Payment Info</h3>
+            <p>
+              <b>Bank Name :</b> {{this.userForm.value['bankName']}}
+            </p>
+            <p>
+              <b>Card Number :</b> {{this.userForm.value['cardNumber']}}
+            </p>
+            <p>
+              <b>CVC Number :</b> {{this.userForm.value['cvcNumber']}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 flex justify-content-end me-3">
+      <button (click)="hideDialog()" class=" default-btn-2 mx-2">Cancel</button>
+      <button (click)="confirmCheckout()" class=" default-btn mx-2">Confirm</button>
+    </div>
+  </div>
+</p-dialog>
