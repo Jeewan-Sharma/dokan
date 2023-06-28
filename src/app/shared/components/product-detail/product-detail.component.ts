@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../../models/product.models';
 import { CartService } from '../../services/cart.service';
 import { FormControl, FormGroup } from '@angular/forms';
-import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
@@ -41,20 +40,5 @@ export class ProductDetailComponent implements OnInit {
     console.log(data);
     this.cartService.addToCart(data);
     this.ref.close();
-    // swal fire
-    Swal.fire({
-      title: 'Added to Cart',
-      text: 'Item has been added to your cart.',
-      icon: 'success',
-      showCancelButton: true,
-      confirmButtonText: 'Go to Cart',
-      cancelButtonText: 'OK',
-      timer: 5000,
-      timerProgressBar: true,
-    }).then((result) => {
-      if (result.value) {
-        this.router.navigate(['/cart']);
-      }
-    });
   }
 }
