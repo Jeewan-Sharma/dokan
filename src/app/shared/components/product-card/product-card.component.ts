@@ -3,6 +3,8 @@ import { Product } from '../../models/product.models';
 import { CartService } from '../../services/cart.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { DialogService } from 'primeng/dynamicdialog';
+import { ProductDetailComponent } from '../product-detail/product-detail.component';
 
 @Component({
   selector: 'app-product-card',
@@ -10,12 +12,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./product-card.component.scss'],
 })
 export class ProductCardComponent {
-  constructor(private cartService: CartService, private router: Router) {}
+  constructor(
+    private cartService: CartService,
+    private router: Router,
+    private dialogService: DialogService
+  ) {}
   @Input() product!: Product;
 
   public visible: boolean = false;
   public showDialog() {
-    this.visible = true;
+    // this.visible = true;
+    const ref = this.dialogService.open(ProductDetailComponent, {
+      header: 'Product Details',
+      width: '70%',
+      closable: true,
+      showHeader: true,
+      dismissableMask: true,
+      styleClass: 'your-dialog-style-class',
+      data: this.product,
+    });
   }
 
   public addToCart() {
