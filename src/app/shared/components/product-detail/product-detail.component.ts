@@ -4,6 +4,7 @@ import { CartService } from '../../services/cart.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-detail',
@@ -18,7 +19,8 @@ export class ProductDetailComponent implements OnInit {
     private cartService: CartService,
     private router: Router,
     public ref: DynamicDialogRef,
-    public config: DynamicDialogConfig
+    public config: DynamicDialogConfig,
+    private toastr: ToastrService
   ) {
     this.quantityForm = new FormGroup({
       quantity: new FormControl(1),
@@ -39,6 +41,11 @@ export class ProductDetailComponent implements OnInit {
     };
     console.log(data);
     this.cartService.addToCart(data);
-    this.ref.close();
+    this.showSuccess();
+  }
+  showSuccess() {
+    this.toastr.success('Item added to cart successfully', 'Success', {
+      timeOut: 1500,
+    });
   }
 }

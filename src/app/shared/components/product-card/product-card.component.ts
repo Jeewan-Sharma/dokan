@@ -4,6 +4,7 @@ import { CartService } from '../../services/cart.service';
 import { Router } from '@angular/router';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-card',
@@ -14,7 +15,8 @@ export class ProductCardComponent {
   constructor(
     private cartService: CartService,
     private router: Router,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private toastr: ToastrService
   ) {}
   @Input() product!: Product;
 
@@ -42,5 +44,11 @@ export class ProductCardComponent {
     };
     console.log(data);
     this.cartService.addToCart(data);
+    // this.showSuccess();
+  }
+  showSuccess() {
+    this.toastr.success('Item added to cart successfully', 'Success', {
+      timeOut: 1500,
+    });
   }
 }
