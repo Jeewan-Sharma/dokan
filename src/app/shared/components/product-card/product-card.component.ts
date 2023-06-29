@@ -25,7 +25,7 @@ export class ProductCardComponent {
     // this.visible = true;
     const ref = this.dialogService.open(ProductDetailComponent, {
       header: 'Product Details',
-      width: '70%',
+      width: '90%',
       closable: true,
       showHeader: true,
       dismissableMask: true,
