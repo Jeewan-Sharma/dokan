@@ -66,6 +66,10 @@ h6 {
     color: var(--primaryColor);
     background-color: aliceblue;
   }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
 .default-btn-2 {
@@ -88,6 +92,10 @@ h6 {
     color: white;
     background-color: var(--primaryColor);
     opacity: 1;
+  }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
 
@@ -131,4 +139,13 @@ h6 {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }

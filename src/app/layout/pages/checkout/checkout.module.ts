@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CheckoutComponent } from './checkout.component';
 import { DialogModule } from 'primeng/dialog';
 import { TableModule } from 'primeng/table';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [CheckoutComponent],
@@ -15,6 +16,7 @@ import { TableModule } from 'primeng/table';
     ReactiveFormsModule,
     DialogModule,
     TableModule,
+    MatInputModule,
   ],
 })
 export class CheckoutModule {}

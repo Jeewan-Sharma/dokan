@@ -8,71 +8,72 @@
       <div class="h-full w-full border-round-lg p-4 customBgWhite">
         <h1 class="text-center">Shipping Address</h1>
         <div class="grid">
-          <div class="p-2 md:col-6 col-12">
-            <label for="">First Name</label>
-            <input type="text" placeholder="Jeewan" formControlName="firstName"
-              class="p-3 w-full border-1 border-round mt-1">
-          </div>
-          <div class="p-2 md:col-6 col-12">
-            <label for="">Last Name</label>
-            <input type="text" placeholder="Sharma" formControlName="lastName"
-              class="p-3 w-full border-1 border-round mt-1">
-          </div>
+          <mat-form-field class="md:col-6 col-12">
+            <mat-label>First Name</mat-label>
+            <input matInput placeholder="Jeewan" formControlName="firstName" required>
+            <mat-error *ngIf="f['firstName']?.invalid">{{getErrorMessage('firstName')}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="md:col-6 col-12">
+            <mat-label>Last Name</mat-label>
+            <input matInput placeholder="Sharma" formControlName="lastName" required>
+            <mat-error *ngIf="f['lastName']?.invalid">{{getErrorMessage('lastName')}}</mat-error>
+          </mat-form-field>
         </div>
         <div class="grid">
-          <div class="p-2 md:col-6 col-12">
-            <label for="">Address 1</label>
-            <input type="text" placeholder="2244, Ithari-2, Shantinagar" formControlName="address1"
-              class="p-3 w-full border-1 border-round mt-1">
-          </div>
-          <div class="p-2 md:col-6 col-12">
-            <label for="">Address 2</label>
-            <input type="text" placeholder="3251, Itahari-1, Birendra Chowk" formControlName="address2"
-              class="p-3 w-full border-1 border-round mt-1">
-          </div>
+          <mat-form-field class="md:col-6 col-12">
+            <mat-label>Address</mat-label>
+            <input matInput placeholder="Itahari-2" formControlName="address1" required>
+            <mat-error *ngIf="f['address1']?.invalid">{{getErrorMessage('address1')}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="md:col-6 col-12">
+            <mat-label>Address</mat-label>
+            <input matInput placeholder="Itahari-2" formControlName="address2" required>
+            <mat-error *ngIf="f['address2']?.invalid">{{getErrorMessage('address2')}}</mat-error>
+          </mat-form-field>
         </div>
 
         <div class="grid">
-          <div class="p-2 md:col-6 col-12">
-            <label for="">Phone</label>
-            <input type="text" placeholder="98XXXXXXXX" formControlName="phone"
-              class="p-3 w-full border-1 border-round mt-1">
-          </div>
-          <div class="p-2 md:col-6 col-12">
-            <label for="">Email</label>
-            <input type="email" placeholder="Jeewan@jeewan.com" formControlName="email"
-              class="p-3 w-full border-1 border-round mt-1">
-          </div>
+          <mat-form-field class="md:col-6 col-12">
+            <mat-label>Enter Phone Number</mat-label>
+            <input matInput placeholder="98XXXXXXXX" formControlName="phone" required>
+            <mat-error *ngIf="f['phone']?.invalid">{{getErrorMessage('phone')}}</mat-error>
+          </mat-form-field>
+          <!-- <div class="p-2 "> -->
+          <mat-form-field class="md:col-6 col-12">
+            <mat-label>Enter Email</mat-label>
+            <input matInput placeholder="sjeewan53@gmail.com" formControlName="email" required>
+            <mat-error *ngIf="f['email']?.invalid">{{getErrorMessage('email')}}</mat-error>
+          </mat-form-field>
         </div>
       </div>
     </div>
     <div class="lg:col-5 md:col-5 col-12 p-3">
       <div class="h-full w-full border-round-lg p-4 customBgWhite">
         <h1 class="text-center">Payment</h1>
-        <div class="p-2 ">
-          <label for="">Name of Bank</label>
-          <input type="email" placeholder="Nabil Bank Limited" formControlName="bankName"
-            class="p-3 w-full border-1 border-round mt-1">
-        </div>
+        <mat-form-field class="col-12">
+          <mat-label>Enter Bank Name</mat-label>
+          <input matInput placeholder="Jeewan Sharma" formControlName="bankName" required>
+          <mat-error *ngIf="f['bankName']?.invalid">{{getErrorMessage('bankName')}}</mat-error>
+        </mat-form-field>
 
-        <div class="p-2 ">
-          <label for="">Visa Card Number</label>
-          <input type="email" placeholder="66XXXXXXXXXXXXXX" formControlName="cardNumber"
-            class="p-3 w-full border-1 border-round mt-1">
-        </div>
-        <div class="p-2 ">
-          <label for="">CVC</label>
-          <input type="email" placeholder="XXX" formControlName="cvcNumber"
-            class="p-3 w-full border-1 border-round mt-1">
-        </div>
+        <mat-form-field class="col-12">
+          <mat-label>Visa Card Number</mat-label>
+          <input matInput placeholder="66XXXXXXXXXXXXX" formControlName="cardNumber" required>
+          <mat-error *ngIf="f['cardNumber']?.invalid">{{getErrorMessage('cardNumber')}}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-12">
+          <mat-label>CVC Number</mat-label>
+          <input matInput placeholder="XXX" formControlName="cvcNumber" required>
+          <mat-error *ngIf="f['cvcNumber']?.invalid">{{getErrorMessage('cvcNumber')}}</mat-error>
+        </mat-form-field>
       </div>
     </div>
 
   </form>
   <div class="flex justify-content-end mt-3">
     <div>
-      <a (click)="showDialog()" class="default-btn">
-        Checkout </a>
+      <button [disabled]="!userForm.valid" (click)="showDialog()" class="default-btn">
+        Checkout </button>
     </div>
   </div>
 </div>
