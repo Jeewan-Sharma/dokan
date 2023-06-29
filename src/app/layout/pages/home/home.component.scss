@@ -46,7 +46,6 @@
   }
   .women {
     background-color: rgb(252, 245, 243);
-
     background-image: url(/assets/images/modals/Lady_shopping.png);
     background-position: bottom;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -85,6 +84,7 @@
     background-color: rgb(252, 245, 243);
     background-image: url(/assets/images/modals/shoe.png);
     background-size: contain;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     background-repeat: no-repeat;
     background-position: right;
     transition: all 0.5s ease-in-out;
@@ -99,6 +99,7 @@
     transition: all 0.5s ease-in-out;
     background-color: rgb(252, 245, 243);
     background-image: url(/assets/images/modals/bag.png);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: right;
@@ -117,13 +118,22 @@
 @media (max-width: 767px) {
   /* CSS styles for mobile screens */
   /* Place your mobile-specific styles here */
-  .myCategories {
-    display: none;
-  }
   // .myCategories {
-  //   .out_box {
-  //     height: 50px;
-  //     // display: block;
-  //   }
+  //   display: none;
   // }
+  .myCategories {
+    .out_box {
+      height: 50px;
+      // display: block;
+      width: 310px;
+    }
+
+    .women,
+    .watch,
+    .bag,
+    .shoe,
+    .men {
+      background-image: none;
+    }
+  }
 }
