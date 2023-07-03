@@ -6,6 +6,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CartProduct } from 'src/app/shared/models/cartProduct.models';
 import { Product } from 'src/app/shared/models/product.models';
 import { CartService } from 'src/app/shared/services/cart.service';
@@ -22,7 +23,7 @@ export class CheckoutComponent {
   userForm: FormGroup;
   products!: CartProduct[];
   sum!: number;
-  constructor(private cartService: CartService) {
+  constructor(private cartService: CartService, private router: Router) {
     this.userForm = new FormGroup({
       firstName: new FormControl(
         '',
@@ -121,6 +122,7 @@ export class CheckoutComponent {
       product: { ...this.products },
       inputs: { ...this.userForm.value },
     };
+    // this.router.navigate(['/sucess']);
     console.log(a);
   }
   private calculateSum() {

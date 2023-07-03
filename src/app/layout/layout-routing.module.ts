@@ -19,7 +19,7 @@ const routes: Routes = [
           import('./pages/cart/cart.module').then((m) => m.CartModule),
       },
 
-      { path: '**', redirectTo: 'home', pathMatch: 'full' },
+      // { path: '**', redirectTo: 'home', pathMatch: 'full' },
     ],
   },
 ];

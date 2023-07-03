@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CartComponent } from './cart.component';
+import { preventCheckoutGuard } from 'src/app/shared/guards/prevent-checkout.guard';
 
 const routes: Routes = [
   {
