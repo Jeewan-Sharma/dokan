@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartProduct } from 'src/app/shared/models/cartProduct.models';
 import { CartService } from 'src/app/shared/services/cart.service';
 @Component({
@@ -9,7 +10,7 @@ import { CartService } from 'src/app/shared/services/cart.service';
 export class CartComponent implements OnInit {
   products!: CartProduct[];
   sum!: number;
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private router: Router) {}
   ngOnInit() {
     this.cartService.cartItems$.subscribe((items) => {
       this.products = items;
@@ -32,5 +33,8 @@ export class CartComponent implements OnInit {
     } else {
       this.sum = 0;
     }
+  }
+  public navigateToHome() {
+    this.router.navigate(['/home']);
   }
 }

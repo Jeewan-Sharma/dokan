@@ -30,7 +30,7 @@
   <!-- </div> -->
 
   <div *ngIf="products.length <= 0">
-    <h1 routerLink="home" class="text-center text-pink-600 cursor-pointer"> No products Here Add From Home</h1>
+    <h1 (click)="navigateToHome()" class="text-center text-pink-600 cursor-pointer"> No products Here Add From Home</h1>
   </div>
   <div class="grid">
     <div class="col-3 lg:col-8"></div>
