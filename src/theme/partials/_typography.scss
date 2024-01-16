@@ -1,0 +1,45 @@
+h1 {
+  font-size: var(--font-size-5xl);
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+h2 {
+  font-size: var(--font-size-4xl);
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+h3 {
+  font-size: var(--font-size-3xl);
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+h4 {
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+h5 {
+  font-size: var(--font-size-xl);
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+h6 {
+  font-size: var(--font-size);
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+p {
+  font-size: var(--font-size);
+  font-weight: 400;
+  color: var(--text-color);
+}
+
+b {
+  font-weight: 600;
+}
