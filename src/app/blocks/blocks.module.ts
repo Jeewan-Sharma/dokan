@@ -9,6 +9,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { SmallDeviceMenuComponent } from './components/small-device-menu/small-device-menu.component';
 
 import { ToastModule } from 'primeng/toast';
+import { AnnouncementComponent } from './components/announcement/announcement.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ToastModule } from 'primeng/toast';
     FooterComponent,
     HeaderComponent,
     LoaderComponent,
-    SmallDeviceMenuComponent
+    SmallDeviceMenuComponent,
+    AnnouncementComponent
   ],
   imports: [
     CommonModule,
