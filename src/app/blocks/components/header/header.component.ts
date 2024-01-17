@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { ASSETS } from "@core/consts";
 
 @Component({
   selector: 'app-header',
@@ -7,4 +9,9 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+  readonly ASSETS = ASSETS
+
+  constructor(public _router: Router) { }
+  cartClicked() { }
+  favouritesClicked() { }
 }

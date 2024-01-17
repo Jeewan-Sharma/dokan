@@ -23,7 +23,7 @@
     "lib": ["ES2022", "dom"],
     "paths": {
       // Core
-      "@core/consts": ["src/app/core/const/index"],
+      "@core/consts": ["src/app/core/consts/index"],
       "@core/enums": ["src/app/core/enums/index"],
       "@core/guards": ["src/app/core/guards/index"],
       "@core/interceptors": ["src/app/core/interceptors/index"],
