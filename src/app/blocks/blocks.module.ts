@@ -9,6 +9,8 @@ import { AnnouncementComponent } from './components/announcement/announcement.co
 
 import { ToastModule } from 'primeng/toast';
 import { ProgressSpinnerModule } from 'primeng/progressspinner'
+import { SidebarModule } from 'primeng/sidebar'
+
 @NgModule({
   declarations: [
     AppLayoutComponent,
@@ -22,6 +24,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner'
     BlocksRoutingModule,
     ToastModule,
     ProgressSpinnerModule,
+    SidebarModule
   ]
 })
 export class BlocksModule { }

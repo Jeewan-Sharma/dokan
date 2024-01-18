@@ -21,5 +21,47 @@
   <div class="flex gap-4 align-items-center">
     <i (click)="favouritesClicked()" class="pi pi-heart-fill text-700 text-3xl cursor-pointer mt-2 color-on-hover"></i>
     <i (click)="cartClicked()" class="pi pi-shopping-cart text-700 text-3xl cursor-pointer mt-2 color-on-hover"></i>
+    <i (click)="openSideMenu()" class="lg:hidden pi pi-bars text-700 text-2xl cursor-pointer mt-2 color-on-hover"></i>
   </div>
 </div>
+
+<p-sidebar header="Menu" *ngIf="_deviceWidthService.screenSize === 'sm' || _deviceWidthService.screenSize === 'md'"
+  [(visible)]="menuVisibility" [style]="{width:'50vw'}" position="right">
+  <ng-template pTemplate="headless">
+    <div class="flex pl-4 pr-2 pt-1 justify-content-between align-items-center">
+      <div class="flex gap-2 align-items-center">
+        <img [src]="ASSETS.IMAGES.LOGO" alt="DOKAN" width="30rem">
+        <p class="text-3xl font-bold text-primary-600">Dokan</p>
+      </div>
+      <i (click)="closeSidebar()" class="pi pi-times-circle text-4xl"></i>
+    </div>
+    <div class="flex flex-column mt-5">
+      <a routerLink="/">
+        <div class="pl-4 md:pl-8 pt-2 text-2xl text-primary-600 border-primary-300 font-semibold border-top-1">
+          Home
+        </div>
+      </a>
+      <a routerLink="/categories">
+        <div class="pl-4 md:pl-8 pt-2 mt-3 text-2xl text-primary-600 border-primary-300 font-semibold border-top-1">
+          Categories
+        </div>
+      </a>
+      <a routerLink="/sale">
+        <div class="pl-4 md:pl-8 pt-2 mt-3 text-2xl text-primary-600 border-primary-300 font-semibold border-top-1">
+          Sale
+        </div>
+      </a>
+      <a routerLink="/about-us">
+        <div class="pl-4 md:pl-8 pt-2 mt-3 text-2xl text-primary-600 border-primary-300 font-semibold border-top-1">
+          About Us
+        </div>
+      </a>
+      <a routerLink="/blog">
+        <div
+          class="pl-4 md:pl-8 pt-2 pb-3 mt-3 text-2xl text-primary-600 border-primary-300 font-semibold border-top-1 border-bottom-1">
+          Blog
+        </div>
+      </a>
+    </div>
+  </ng-template>
+</p-sidebar>
