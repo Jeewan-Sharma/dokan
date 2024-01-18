@@ -1,1 +1,86 @@
-<p>home works!</p>
+<!-- Banner -->
+<div class="grid m-0 bg-primary-50 flex align-items-center">
+  <div class="col-7 md:col-7 p-0 pb-2 text-right">
+    <p class="text-4xl font-bold">Today's deal; sale 70% off. Hurry Up!</p>
+    <p class="mt-3 font-semibold text-xl">Hurry up the offer is for the limited time only!</p>
+    <p-button label="Explore Now" icon="pi pi-caret-right" iconPos="right"
+      styleClass="mt-3 bg-primary-600 border-primary-600"></p-button>
+  </div>
+  <div class="col-5 md:col-5 p-0 flex align-items-end justify-content-center md:justify-content-start pt-3">
+    <!-- use ng class with device width services -->
+    <img [src]="ASSETS.IMAGES.BANNER_LADY" alt="lady" height="450rem"
+      [ngClass]="{'h-16rem':(_deviceWidthService.screenSize$ | async) === 'sm'}">
+  </div>
+</div>
+<div class="container px-5 mt-4 mb-5 ">
+  <!-- Display Category Section -->
+  <div class="grid p-2 justify-content-center myCategories">
+    <div class="lg:col-6 md:col-12">
+      <div class="grid ">
+        <div class="col-12 md:col-5 p-2">
+          <div class="out_box women alignjustifycenter">
+            <div class="default-btn-2 btn_shadow">
+              Women
+            </div>
+          </div>
+        </div>
+        <div class="col-12 md:col-7 p-2 ">
+          <div class="out_box ">
+            <div class="in_box p-2 mb-2 shoe">
+              <div class="default-btn-2 btn_shadow mb-1">
+                Shoes
+              </div>
+            </div>
+            <div class="in_box p-2 bag">
+              <div class="default-btn-2 btn_shadow">
+                Bags
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lg:col-6 md:col-12 md:mt-0 mt-8">
+      <div class="grid">
+        <div class="col-12 md:col-5  p-2">
+          <div class="out_box watch alignjustifycenter">
+            <div class="default-btn-2 btn_shadow">
+              Watch
+            </div>
+          </div>
+        </div>
+        <div class="col-12 md:col-7 p-2">
+          <div class="out_box men alignjustifycenter">
+            <div class="default-btn-2 btn_shadow">
+              Man
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Display Category Section Ends  -->
+
+  <div class=" headings p-4">
+    <h1>- All Products -</h1>
+    <!-- <p> <i>
+        Top in this week
+      </i>
+    </p> -->
+    <div class="border-solid border-round-md border-300 p-3 ">
+      <p>test</p>
+      <!-- <div class="px-5">
+        <input type="text" [(ngModel)]="searchTerm" placeholder="Search Your Needs Here!"
+          class="m-1 w-full h-3rem border-round-md mb-5 px-5 text-lg">
+      </div>
+
+      <div class=" grid">
+        <app-product-card *ngFor="let item of products | searchFilter : searchTerm"
+          class="md:col-6 lg:col-3 flex justify-content-center mb-3" [product]="item"></app-product-card>
+      </div> -->
+    </div>
+  </div>
+  <!--  -->
+  <div>
+  </div>
+</div>

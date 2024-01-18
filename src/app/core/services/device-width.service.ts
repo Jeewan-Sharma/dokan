@@ -1,30 +1,45 @@
 import { Injectable } from '@angular/core';
+import { fromEvent, Observable, BehaviorSubject } from 'rxjs';
+import { debounceTime, map, startWith } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DeviceWidthService {
 
-  screenSize!: string;
-  innerWidth!: number;
+  private screenSizeSubject: BehaviorSubject<string>;
+  screenSize$: Observable<string>;
 
   constructor() {
-    this.getScreenSize()
+    this.screenSizeSubject = new BehaviorSubject<string>(this.getScreenSize(window.innerWidth));
+    this.screenSize$ = this.screenSizeSubject.asObservable();
+    this.setupResizeListener();
   }
 
-  setWidth() {
-    this.innerWidth = window.innerWidth;
+  private setupResizeListener(): void {
+    fromEvent(window, 'resize')
+      .pipe(
+        debounceTime(300), // to limit emitation of size
+        map((event: any) => event.target.innerWidth),
+        startWith(window.innerWidth)
+      )
+      .subscribe((width: number) => {
+        const newSize = this.getScreenSize(width);
+        if (newSize !== this.screenSizeSubject.value) {
+          this.screenSizeSubject.next(newSize);
+        }
+      });
   }
-  async getScreenSize() {
-    await this.setWidth()
-    if (this.innerWidth < 786) {
-      this.screenSize = 'sm'
-    } else if (this.innerWidth > 786 && this.innerWidth <= 992) {
-      this.screenSize = 'md'
-    } else if (this.innerWidth > 992 && this.innerWidth <= 1200) {
-      this.screenSize = 'lg'
-    } else if (this.innerWidth > 1200) {
-      this.screenSize = 'xl'
+
+  private getScreenSize(innerWidth: number): string {
+    if (innerWidth < 750) {
+      return 'sm';
+    } else if (innerWidth <= 992) {
+      return 'md';
+    } else if (innerWidth <= 1200) {
+      return 'lg';
+    } else {
+      return 'xl';
     }
   }
 }
