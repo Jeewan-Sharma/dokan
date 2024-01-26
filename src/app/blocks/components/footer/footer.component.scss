@@ -3,10 +3,3 @@ span,
 i {
   color: var(--primary-100);
 }
-
-.color-on-hover {
-  transition: all 0.3s ease-in;
-  &:hover {
-    color: var(--primary-500) !important;
-  }
-}
