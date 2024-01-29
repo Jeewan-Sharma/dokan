@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ASSETS } from '@core/consts';
-import { DeviceWidthService } from '@core/services';
+import { EPageState } from '@core/enums';
+import { DeviceWidthService, LoaderService } from '@core/services';
+import { ProductsService } from 'src/app/core/services/products.service';
 
 @Component({
   selector: 'app-home',
@@ -9,10 +11,43 @@ import { DeviceWidthService } from '@core/services';
 })
 export class HomeComponent implements OnInit {
 
-  readonly ASSETS = ASSETS
+  readonly ASSETS = ASSETS;
+  readonly EPageState = EPageState;
+  pageState: EPageState = EPageState.LOADING;
 
-  constructor(protected _deviceWidthService: DeviceWidthService) { }
+  apiData: any[] = [];
+  searchedInputResult: string = '';
 
-  ngOnInit(): void { }
+  constructor(
+    protected _deviceWidthService: DeviceWidthService,
+    private _loaderService: LoaderService,
+    private _productService: ProductsService
+  ) { }
+
+  ngOnInit(): void {
+    this.getProductList()
+  }
+
+  async getProductList() {
+    try {
+      this._loaderService.showLoader()
+      this.apiData = await this._productService.getProductList(this.searchedInputResult ? this.searchedInputResult : '');
+      if (this.apiData.length === 0) {
+        this.pageState = EPageState.EMPTY;
+      }
+      else {
+        this.pageState = EPageState.SUCCESS;
+      }
+    } catch (err) {
+      // this._toastService.showError({
+      //   message: STRINGS.IMAGEFINDER.GET_IMAGELIST_FAILED,
+      // });
+      this.pageState = EPageState.ERROR;
+    }
+    finally {
+      this._loaderService.hideLoader();
+    }
+  }
+
 
 }

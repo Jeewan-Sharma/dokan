@@ -18,7 +18,11 @@
     <a routerLink="/blog" class="hidden lg:flex text-xl text-700 font-bold cursor-pointer hover-color">Blog</a>
   </div>
   <!-- Right: Icon Bar -->
-  <div class="flex gap-4 align-items-center">
+  <div class="flex gap-4 align-items-center ml-3 md:ml-0">
+    <p-inputGroup>
+      <input type="text" pInputText placeholder="Search" />
+      <button type="button" pButton icon="pi pi-search" class="bg-gray-700 border-gray-700"></button>
+    </p-inputGroup>
     <i (click)="favouritesClicked()" class="pi pi-heart-fill text-700 text-3xl cursor-pointer mt-2 hover-color"></i>
     <i (click)="cartClicked()" class="pi pi-shopping-cart text-700 text-3xl cursor-pointer mt-2 hover-color"></i>
     <i (click)="openSideMenu()" class="lg:hidden pi pi-bars text-700 text-2xl cursor-pointer mt-2 hover-color"></i>

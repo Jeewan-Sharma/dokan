@@ -10,7 +10,9 @@ import { AnnouncementComponent } from './components/announcement/announcement.co
 import { ToastModule } from 'primeng/toast';
 import { ProgressSpinnerModule } from 'primeng/progressspinner'
 import { SidebarModule } from 'primeng/sidebar'
-
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
 @NgModule({
   declarations: [
     AppLayoutComponent,
@@ -24,7 +26,10 @@ import { SidebarModule } from 'primeng/sidebar'
     BlocksRoutingModule,
     ToastModule,
     ProgressSpinnerModule,
-    SidebarModule
+    SidebarModule,
+    InputGroupModule,
+    InputTextModule,
+    ButtonModule
   ]
 })
 export class BlocksModule { }
