@@ -24,8 +24,8 @@ export class HomeComponent implements OnInit {
     private _productService: ProductsService
   ) { }
 
-  ngOnInit(): void {
-    this.getProductList()
+  async ngOnInit() {
+    await this.getProductList()
   }
 
   async getProductList() {

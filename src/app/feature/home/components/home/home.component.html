@@ -1,8 +1,8 @@
 <!-- Banner -->
 <div class="grid m-0 bg-primary-50 flex align-items-center">
   <div class="col-7 p-0 pb-2 text-right">
-    <p class="text-4xl font-bold">Today's deal; sale 70% off. Hurry Up!</p>
-    <p class="mt-3 font-semibold text-xl">Hurry up the offer is for the limited time only!</p>
+    <p class="text-4xl text-800 font-bold">Unlock Your Wardrobe's Potential at Dokan</p>
+    <p class="mt-3 font-semibold text-xl">Let Your Style Speak Volumes with Our Brands</p>
     <p-button label="Explore" icon="pi pi-arrow-right" iconPos="right"
       styleClass="mt-3 bg-primary-600 border-primary-600 hover-pop"></p-button>
   </div>
@@ -95,13 +95,8 @@
   <!-- Display Category Section Ends  -->
 
   <!-- product section -->
-  <p class="text-center text-2xl font-semibold mt-5">Top sells</p>
-  <p>test</p>
-  <!-- <div class=" grid">
-        <app-product-card *ngFor="let item of products | searchFilter : searchTerm"
-          class="md:col-6 lg:col-3 flex justify-content-center mb-3" [product]="item"></app-product-card>
-      </div> -->
-  <!--  -->
+  <p class="text-center text-2xl font-bold mt-5">Top sells</p>
+  <app-list-products [products]="apiData"></app-list-products>
   <div>
   </div>
 </div>
