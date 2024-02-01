@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DeviceWidthService } from '@core/services';
+import { DeviceWidthService, ToastService } from '@core/services';
 
 import { DialogModule } from 'primeng/dialog';
 import { SidebarModule } from 'primeng/sidebar';
@@ -26,10 +26,16 @@ export class ListProductsComponent {
   cartQuantity: number = 1;
 
 
-  constructor(protected _deviceWidthService: DeviceWidthService,
+  constructor(
+    protected _deviceWidthService: DeviceWidthService,
+    private _toastService: ToastService,
   ) {
   }
-  addToCart() { }
+  addToCart() {
+    this._toastService.showSuccess({
+      message: "Added to cart Successfully",
+    });
+  }
 
 
   viewDetails(product: IProducts) {

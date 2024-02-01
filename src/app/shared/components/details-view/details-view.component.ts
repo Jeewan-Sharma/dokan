@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IProducts } from '@core/models';
+import { ToastService } from '@core/services';
 
 import { RatingModule } from 'primeng/rating';
 
@@ -13,12 +14,5 @@ import { RatingModule } from 'primeng/rating';
   styleUrl: './details-view.component.scss'
 })
 export class DetailsViewComponent {
-
   @Input() product!: IProducts;
-
-  constructor() { }
-
-  cartQuantity: number = 1;
-
-  addToCart() { }
 }
