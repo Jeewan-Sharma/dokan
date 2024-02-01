@@ -29,14 +29,17 @@ export class ListProductsComponent {
   constructor(
     protected _deviceWidthService: DeviceWidthService,
     private _toastService: ToastService,
-  ) {
+  ) { }
+
+  get screenSize$() {
+    return this._deviceWidthService.screenSize$;
   }
+
   addToCart() {
     this._toastService.showSuccess({
       message: "Added to cart Successfully",
     });
   }
-
 
   viewDetails(product: IProducts) {
     this.detailsVisibility = true;

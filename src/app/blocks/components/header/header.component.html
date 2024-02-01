@@ -23,8 +23,10 @@
       <input type="text" pInputText placeholder="Search" />
       <button type="button" pButton icon="pi pi-search" class="bg-gray-700 border-gray-700"></button>
     </p-inputGroup>
-    <i (click)="favouritesClicked()" class="pi pi-heart-fill text-700 text-3xl cursor-pointer mt-2 hover-color"></i>
-    <i (click)="cartClicked()" class="pi pi-shopping-cart text-700 text-3xl cursor-pointer mt-2 hover-color"></i>
+    <i (click)="favouritesClicked()" pBadge value="2"
+      class="pi pi-heart-fill text-700 text-3xl cursor-pointer mt-2 hover-color"></i>
+    <i (click)="cartClicked()" pBadge value="2"
+      class="pi pi-shopping-cart text-700 text-3xl cursor-pointer mt-2 hover-color"></i>
     <i (click)="openSideMenu()" class="lg:hidden pi pi-bars text-700 text-2xl cursor-pointer mt-2 hover-color"></i>
   </div>
 </div>

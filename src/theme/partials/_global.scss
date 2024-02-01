@@ -143,6 +143,10 @@ a {
   }
 }
 
+.p-badge {
+  background: var(--primary-600) !important;
+}
+
 // Scrollbar
 ::-webkit-scrollbar {
   height: 7px;

@@ -1,8 +1,9 @@
 <div class="grid m-0">
-  <div class="col-12 md:col-6 flex justify-content-center">
-    <img [src]="product.image" alt="Product Image" class="h-20rem text-center">
+  <div class="col-12 lg:col-6 flex justify-content-center">
+    <img [src]="product.image" alt="Product Image" class="text-center"
+      [ngClass]="(_deviceWidthService.screenSize$ | async) === 'sm'?'h-15rem':'h-20rem'">
   </div>
-  <div class="col-12 md:col-6 px-3">
+  <div class="col-12 lg:col-6 px-3">
     <p class="text-xl text-800 font-bold">Category: {{product.category}}</p>
 
     <div class="flex gap-3 align-items-center mt-3">

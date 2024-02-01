@@ -13,6 +13,17 @@ import { SidebarModule } from 'primeng/sidebar'
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { BadgeModule } from 'primeng/badge';
+
+const primengModules = [
+  ToastModule,
+  ProgressSpinnerModule,
+  SidebarModule,
+  InputGroupModule,
+  InputTextModule,
+  ButtonModule,
+  BadgeModule
+]
 
 @NgModule({
   declarations: [
@@ -25,12 +36,7 @@ import { ButtonModule } from 'primeng/button';
   imports: [
     CommonModule,
     BlocksRoutingModule,
-    ToastModule,
-    ProgressSpinnerModule,
-    SidebarModule,
-    InputGroupModule,
-    InputTextModule,
-    ButtonModule
+    primengModules,
   ]
 })
 export class BlocksModule { }

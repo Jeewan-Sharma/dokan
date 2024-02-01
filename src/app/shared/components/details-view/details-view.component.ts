@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IProducts } from '@core/models';
-import { ToastService } from '@core/services';
+import { DeviceWidthService, ToastService } from '@core/services';
 
 import { RatingModule } from 'primeng/rating';
 
@@ -15,4 +15,5 @@ import { RatingModule } from 'primeng/rating';
 })
 export class DetailsViewComponent {
   @Input() product!: IProducts;
+  constructor(protected _deviceWidthService: DeviceWidthService) { }
 }
