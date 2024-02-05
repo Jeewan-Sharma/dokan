@@ -14,6 +14,7 @@ import { InputGroupModule } from 'primeng/inputgroup';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { BadgeModule } from 'primeng/badge';
+import { ToastComponent } from './components/toast/toast.component';
 
 const primengModules = [
   ToastModule,
@@ -31,7 +32,8 @@ const primengModules = [
     FooterComponent,
     HeaderComponent,
     LoaderComponent,
-    AnnouncementComponent
+    AnnouncementComponent,
+    ToastComponent
   ],
   imports: [
     CommonModule,
