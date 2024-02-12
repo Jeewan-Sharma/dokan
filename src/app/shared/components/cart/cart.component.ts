@@ -42,7 +42,7 @@ export class CartComponent {
   }
 
   valueChanged() {
-    console.log(this.cartProducts$)
+    this._cartService.changeValue()
   }
 
   openDeleteDialog(product: any) {

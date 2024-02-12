@@ -12,29 +12,13 @@ export class CartService {
 
   private cartProductsSubject: BehaviorSubject<ICart[]> = new BehaviorSubject<ICart[]>(this.getInitialCartProducts());
   cartProducts$: Observable<ICart[]> = this.cartProductsSubject.asObservable();
-  totalItems$: Observable<number>;
-  totalAmount$: Observable<number>;
-  discountAmount$: Observable<number>;
-  totalSum$: Observable<number>;
+  totalItems$!: Observable<number>;
+  totalAmount$!: Observable<number>;
+  discountAmount$!: Observable<number>;
+  totalSum$!: Observable<number>;
 
   constructor() {
-    this.totalItems$ = this.cartProducts$.pipe(
-      map(products => products.reduce((total, product) => total + product.quantity, 0))
-    );
-
-    this.totalAmount$ = this.cartProducts$.pipe(
-      map(products => products.reduce((total, product) => total + (product.price * product.quantity), 0))
-    );
-
-    this.discountAmount$ = this.totalAmount$.pipe(
-      map(total => total * CONFIG.DISCOUNT_PERCENTAGE / 100)
-    );
-
-    const shippingCharge = CONFIG.SHIPPING_FEE;
-
-    this.totalSum$ = combineLatest([this.totalAmount$, this.discountAmount$]).pipe(
-      map(([totalAmount, discountAmount]) => totalAmount - discountAmount + shippingCharge)
-    );
+    this.calculateSums();
   }
 
   private getInitialCartProducts(): ICart[] {
@@ -87,8 +71,33 @@ export class CartService {
     }
   }
 
+  changeValue() {
+    this.calculateSums()
+    localStorage.setItem('DokanCartProducts', JSON.stringify(this.cartProductsSubject.value));
+  }
+
   clearCartProducts() {
     localStorage.setItem('DokanCartProducts', '');
+  }
+
+  calculateSums() {
+    this.totalItems$ = this.cartProducts$.pipe(
+      map(products => products.reduce((total, product) => total + product.quantity, 0))
+    );
+
+    this.totalAmount$ = this.cartProducts$.pipe(
+      map(products => products.reduce((total, product) => total + (product.price * product.quantity), 0))
+    );
+
+    this.discountAmount$ = this.totalAmount$.pipe(
+      map(total => total * CONFIG.DISCOUNT_PERCENTAGE / 100)
+    );
+
+    const shippingCharge = CONFIG.SHIPPING_FEE;
+
+    this.totalSum$ = combineLatest([this.totalAmount$, this.discountAmount$]).pipe(
+      map(([totalAmount, discountAmount]) => totalAmount - discountAmount + shippingCharge)
+    );
   }
 
 }
