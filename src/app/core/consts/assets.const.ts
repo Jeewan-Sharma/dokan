@@ -8,6 +8,7 @@ const IMAGES = {
   SHOES: `${IMAGE_BASE}/modals/shoes.png`,
   WATCHES: `${IMAGE_BASE}/modals/watches.png`,
   MEN: `${IMAGE_BASE}/modals/men.png`,
+  EMPTY_CART: `${IMAGE_BASE}/emptyCart.png`,
 }
 
 

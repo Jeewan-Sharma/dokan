@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ASSETS } from "@core/consts";
-import { DeviceWidthService } from '@core/services';
+import { CartService, DeviceWidthService } from '@core/services';
 
 @Component({
   selector: 'app-header',
@@ -10,17 +10,31 @@ import { DeviceWidthService } from '@core/services';
 })
 export class HeaderComponent {
 
-  readonly ASSETS = ASSETS
+  @Output() onCartClicked: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() onFavoritesClicked: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  menuVisibility: boolean = false
+  readonly ASSETS = ASSETS;
 
-  constructor(public _router: Router, protected _deviceWidthService: DeviceWidthService) { }
-  cartClicked() { }
-  favouritesClicked() { }
+  menuVisibility: boolean = false;
+
+  constructor(
+    public _router: Router,
+    protected _deviceWidthService: DeviceWidthService,
+    protected _cartService: CartService,
+  ) { }
+
+  cartClicked() {
+    this.onCartClicked.emit(true);
+  }
+
+  favoritesClicked() {
+    this.onFavoritesClicked.emit(true);
+  }
+
   openSideMenu() {
     this.menuVisibility = true;
   }
   closeSidebar() {
-    this.menuVisibility = false
+    this.menuVisibility = false;
   }
 }

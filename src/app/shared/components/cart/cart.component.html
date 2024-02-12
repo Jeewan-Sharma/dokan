@@ -1,0 +1,171 @@
+<div class="grid m-0 mt-0 lg:mt-2">
+  <div class="col-12 lg:col-8 p-0 lg:p-2">
+    <div class="border-1 border-300 border-round bg-gray-100 mb-2 hidden lg:block">
+      <div class="grid m-0 p-2">
+        <div class="col-5">
+          <p class="text-xl font-bold ml-6">Product</p>
+        </div>
+        <div class="col-2 flex justify-content-center">
+          <p class="text-xl font-bold">Unit Price</p>
+        </div>
+        <div class="col-2 flex justify-content-center">
+          <p class="text-xl font-bold">Quantity</p>
+        </div>
+        <div class="col-2 flex justify-content-center">
+          <p class="text-xl font-bold">Total Price</p>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="(cartProducts$ | async) as cartProducts">
+      <div *ngFor="let cartProduct of cartProducts" class="border-1 border-300 border-round bg-gray-100 mb-2">
+        <div class="grid m-0 px-3 pt-3 pb-3 lg:pb-0 lg:pt-2">
+          <div class="col-3 lg:col-1">
+            <div class="h-5rem w-full overflow-hidden border-round ">
+              <img src={{cartProduct.image}} alt="Shop Image" class="object-fit h-full w-full">
+            </div>
+          </div>
+          <div class="col-9 lg:col-4 line-height-4">
+            <div class="text-xl text-bold white-space-nowrap overflow-hidden text-overflow-ellipsis">
+              {{cartProduct.title}}</div>
+            <div class="text-600 white-space-nowrap overflow-hidden text-overflow-ellipsis">
+              {{cartProduct.description}}
+            </div>
+          </div>
+          <div class="col-6 lg:col-2 flex align-items-center justify-content-center gap-2">
+            <p class="lg:hidden">Unit Price: </p>
+            <p class="text-xl text-bold">{{cartProduct.price | currency:"USD"}}</p>
+          </div>
+          <div class="col-6 lg:col-2 flex align-items-center justify-content-end">
+            <div class="input-custom">
+              <p-inputNumber (onInput)="valueChanged()" class="mt-2" [(ngModel)]="cartProduct.quantity"
+                [showButtons]="true" [min]="1" buttonLayout="horizontal" inputId="horizontal" spinnerMode="horizontal"
+                [step]="1" decrementButtonClass="p-button-danger" incrementButtonClass="p-button-success"
+                incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
+              </p-inputNumber>
+            </div>
+          </div>
+          <div class="col-6 lg:col-2 flex align-items-center justify-content-center gap-2">
+            <p class="lg:hidden">Total Price: </p>
+            <p class="text-xl text-bold">{{cartProduct.price * cartProduct.quantity | currency:"USD"}}</p>
+          </div>
+          <div class="col-6 lg:col-1 flex align-items-center justify-content-end">
+            <i (click)="openDeleteDialog(cartProduct)"
+              class="pi pi-trash text-red-500 text-2xl cursor-pointer mr-2"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="(cartProducts$ | async) && (cartProducts$ | async )?.length === 0">
+      <div class="text-center py-8">
+        <img [src]=ASSETS.IMAGES.EMPTY_CART class="w-7rem">
+        <p class="text-3xl text-600 font-semibold">No Products In Cart</p>
+      </div>
+    </div>
+  </div>
+  <!-- summary -->
+  <div class="col-12 lg:col-4 px-2">
+
+    <div class="border-1 border-300 border-round bg-gray-100 p-2">
+      <p class="text-xl font-bold my-2">Order Summary</p>
+    </div>
+
+    <div class="border-1 border-300 border-round bg-gray-100 mt-2 p-3">
+      <div class="flex">
+        <div class="w-9">
+          <p class="text-xl">Subtotal ({{_cartService.totalItems$ | async}} Items)</p>
+        </div>
+        <div class="w-3">
+          <p class="text-xl font-semibold text-right">{{(_cartService.totalAmount$ | async)| currency:
+            'USD'}}</p>
+        </div>
+      </div>
+      <div class="flex mt-2">
+        <div class="w-9">
+          <p class="text-xl">Discount ({{CONFIG.DISCOUNT_PERCENTAGE}}%)</p>
+        </div>
+        <div class="w-3">
+          <p class="text-xl font-semibold text-right">- {{(_cartService.discountAmount$ | async) |
+            currency:'USD'}}</p>
+        </div>
+      </div>
+      <div class="flex my-2">
+        <div class="w-9">
+          <p class="text-xl">Shipping Fee</p>
+        </div>
+        <div class="w-3">
+          <p class="text-xl font-semibold text-right">{{((_cartService.totalItems$ | async) === 0 ? 0 :
+            CONFIG.SHIPPING_FEE) | currency:'USD'}}
+          </p>
+        </div>
+      </div>
+      <p-divider></p-divider>
+      <div class="flex mt-2">
+        <div class="w-9">
+          <p class="text-2xl font-bold">Total</p>
+        </div>
+        <div class="w-3">
+          <p class="text-2xl font-bold text-right">{{(_cartService.totalSum$| async) | currency:'USD'}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-dialog *ngIf="(screenSize$ | async) === 'lg' || (screenSize$ | async) === 'xl'" [modal]='true'
+  [(visible)]="confirmVisibility" [style]="{width: '30vw'}">
+  <div class="p-3">
+    <div class="flex justify-content-center align-items-center">
+      <div class="flex gap-2 align-items-center">
+        <p class="text-2xl font-bold">Confirm Delete</p>
+      </div>
+    </div>
+    <p class="text-xl text-700 font-semibold mt-5 text-center">Are you sure to remove {{selectedProduct &&
+      selectedProduct.title}}
+      from
+      the
+      cart?</p>
+    <div class="grid m-0 mt-6">
+      <div class="col-6 py-0">
+        <p-button (click)="cancelDelete()" class="button-label-xl" label="Cancel" [outlined]="true" severity="danger"
+          styleClass="w-full"></p-button>
+      </div>
+      <div class="col-6 py-0">
+        <p-button (click)='confirmDelete(selectedProduct)' class="button-label-xl" label="Delete" severity="danger"
+          styleClass="w-full"></p-button>
+      </div>
+    </div>
+  </div>
+</p-dialog>
+
+
+<p-sidebar *ngIf="(screenSize$ | async) === 'sm' || (screenSize$ | async) === 'md'" [(visible)]="confirmVisibility"
+  position="bottom" styleClass="border-round-top" [modal]="false">
+  <ng-template pTemplate="header">
+    <div class="flex justify-content-center align-items-center px-2 pb-3">
+      <div class="flex gap-2 align-items-center">
+        <p class="text-2xl font-bold">Confirm Delete</p>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="content">
+    <div class="text-xl text-700 font-semibold text-center p-2">Are you sure to remove {{selectedProduct &&
+      selectedProduct.title}} from
+      the
+      cart?
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <div class="grid m-0 pb-2 px-2">
+      <div class="col-6 py-0">
+        <p-button (click)="cancelDelete()" class="button-label-xl " label="Cancel" [outlined]="true" severity="danger"
+          styleClass="w-full  "></p-button>
+      </div>
+      <div class="col-6 py-0">
+        <p-button (click)='confirmDelete(selectedProduct)' class="button-label-xl" label="Delete" severity="danger"
+          styleClass="w-full"></p-button>
+      </div>
+    </div>
+  </ng-template>
+</p-sidebar>

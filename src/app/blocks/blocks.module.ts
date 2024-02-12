@@ -6,20 +6,23 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { AnnouncementComponent } from './components/announcement/announcement.component';
+import { ToastComponent } from './components/toast/toast.component';
+import { CartComponent } from '../shared/components/cart/cart.component';
 
 import { ToastModule } from 'primeng/toast';
 import { ProgressSpinnerModule } from 'primeng/progressspinner'
 import { SidebarModule } from 'primeng/sidebar'
+import { DialogModule } from 'primeng/dialog'
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { BadgeModule } from 'primeng/badge';
-import { ToastComponent } from './components/toast/toast.component';
 
 const primengModules = [
   ToastModule,
   ProgressSpinnerModule,
   SidebarModule,
+  DialogModule,
   InputGroupModule,
   InputTextModule,
   ButtonModule,
@@ -38,6 +41,7 @@ const primengModules = [
   imports: [
     CommonModule,
     BlocksRoutingModule,
+    CartComponent,
     primengModules,
   ]
 })

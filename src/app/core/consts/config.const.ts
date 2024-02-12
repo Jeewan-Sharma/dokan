@@ -1,3 +1,4 @@
 export const CONFIG = {
-
-};
+  DISCOUNT_PERCENTAGE: 10,
+  SHIPPING_FEE: 5
+}
