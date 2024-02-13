@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { DeviceWidthService } from '@core/services';
+import { CartService, DeviceWidthService } from '@core/services';
 
 @Component({
   selector: 'app-app-layout',
@@ -13,6 +13,7 @@ export class AppLayoutComponent {
 
   constructor(
     protected _deviceWidthService: DeviceWidthService,
+    protected _cartService: CartService,
     private _router: Router,
   ) { }
 
