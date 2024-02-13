@@ -1,0 +1,53 @@
+<app-announcement></app-announcement>
+<app-header (onCartClicked)="showCart()"></app-header>
+<router-outlet></router-outlet>
+<app-footer></app-footer>
+<app-loader></app-loader>
+<app-toast></app-toast>
+
+<!-- cart -->
+<p-dialog *ngIf="(screenSize$ | async) === 'lg' || (screenSize$ | async) === 'xl'" class="header-less-dialog"
+  [modal]='true' [(visible)]="cartVisibility" [style]="{width: '95vw', height:'100vh'}">
+  <ng-template pTemplate="header">
+    <div class="px-2 pb-2">
+      <div class="flex gap-2 align-items-center">
+        <p class="text-3xl font-bold">Cart</p>
+        <i class="pi pi-shopping-cart text-3xl"></i>
+      </div>
+    </div>
+  </ng-template>
+  <div class="p-3">
+    <app-cart *ngIf="cartVisibility"></app-cart>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="px-2 pb-2">
+      <!-- [disabled]="(_cartService.cartProducts | async).length === 0" -->
+      <button (click)="proceedToCheckout()" pButton pRipple label="Proceed to Checkout"
+        class="bg-primary-600 border-primary-600 w-full mt-3"></button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-sidebar header="Cart" *ngIf="(screenSize$ | async) === 'sm' || (screenSize$ | async) === 'md'"
+  [(visible)]="cartVisibility" position="bottom" [style]="{height:'90vh'}" styleClass="border-round-top">
+  <ng-template pTemplate="header">
+    <div class="px-2 pb-2">
+      <div class="flex gap-2 align-items-center">
+        <p class="text-3xl font-bold">Cart</p>
+        <i class="pi pi-shopping-cart text-3xl"></i>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="content">
+    <div class="px-3">
+      <app-cart *ngIf="cartVisibility"></app-cart>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <div class="px-2 pb-2">
+      <!-- [disabled]="(_cartService.cartProducts | async).length === 0" -->
+      <button (click)="proceedToCheckout()" pButton pRipple label="Proceed to Checkout"
+        class="bg-red-500 border-red-500 w-full mt-3"></button>
+    </div>
+  </ng-template>
+</p-sidebar>

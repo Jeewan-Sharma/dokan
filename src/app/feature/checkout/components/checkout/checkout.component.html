@@ -1,0 +1,124 @@
+<div class="px-3 lg:px-8 py-3 flex">
+  <!-- INFORMATION -->
+  <div class="w-8 pr-1">
+    <div class="border-1 border-300 border-round bg-gray-100 p-3">
+      <p class="text-xl font-bold">Shipping Information</p>
+      <div class="flex gap-3 mt-3">
+        <div class="border-2 border-700 border-dashed border-round p-2 ">
+          <p class="text-sm">Jeewan Sharma</p>
+          <p class="text-sm">(+61) 452 645 605</p>
+          <p class="text-sm">1208/5 Second Avenue, Blacktown, NSW</p>
+        </div>
+        <div class="border-2 border-700 border-dashed border-round px-3 flex justify-content-center align-items-center">
+          <i class="pi pi-plus text-3xl"></i>
+        </div>
+      </div>
+
+      <p class="text-xl font-bold mt-4">Payment Information</p>
+      <form [formGroup]="paymentDetailForm">
+        <div class="grid mt-1">
+          <div class="col-6">
+            <p class="text-700 text-lg mb-1">Name In Card<span class="text-red-600">*</span></p>
+            <input pInputText formControlName="nameInCard" placeholder="First Last" class="w-full" />
+            <div *ngIf="paymentDetailForm.get('nameInCard')?.invalid && paymentDetailForm.get('nameInCard')?.touched">
+              <p class="text-red-500">Name is required.</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <p class="text-700 text-lg mb-1">Card Number<span class="text-red-600">*</span></p>
+            <p-inputMask mask="9999 9999 9999 9999" formControlName="cardNumber" placeholder="XXXX XXXX XXXX XXXX"
+              styleClass="w-full"></p-inputMask>
+            <div *ngIf="paymentDetailForm.get('cardNumber')?.invalid && paymentDetailForm.get('cardNumber')?.touched">
+              <p class="text-red-500">Card Number is required.</p>
+            </div>
+          </div>
+          <div class="mt-2 col-6">
+            <p class="text-700 text-lg mb-1">Expiry Date<span class="text-red-600">*</span></p>
+            <p-calendar [minDate]="today" formControlName="expiryDate" styleClass="w-full"></p-calendar>
+            <div *ngIf="paymentDetailForm.get('expiryDate')?.invalid && paymentDetailForm.get('expiryDate')?.touched">
+              <p class="text-red-500">Expiry Date is required.</p>
+            </div>
+          </div>
+          <div class="mt-2 col-6">
+            <p class="text-700 text-lg mb-1">CVC <span class="text-red-600">*</span></p>
+            <p-inputMask mask="999" formControlName="cvc" placeholder="XXX" styleClass="w-full"></p-inputMask>
+            <div *ngIf="paymentDetailForm.get('cvc')?.invalid && paymentDetailForm.get('cvc')?.touched">
+              <p class="text-red-500">CVC is required.</p>
+            </div>
+          </div>
+        </div>
+        <button (click)="checkout()" pButton pRipple label="Checkout"
+          class="mt-3 w-full bg-primary-600 border-primary-600"></button>
+      </form>
+
+
+    </div>
+  </div>
+
+  <!-- SUMMERY -->
+  <div class=" w-4 pl-1">
+    <div class="border-1 border-300 border-round bg-gray-100 p-3">
+      <p class="text-xl font-bold">Your Order</p>
+
+      <div class="mt-3">
+        <div *ngFor="let products of _cartService.cartProducts$ | async">
+          <div class="grid">
+            <div class="col-2">
+              <p class="text-lg">{{products.quantity}} x</p>
+            </div>
+            <div class="col-8">
+              <p class="text-lg white-space-nowrap overflow-hidden text-overflow-ellipsis">{{products.title}}
+              </p>
+            </div>
+            <div class="col-2">
+              <p class="text-lg">{{products.price}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p-divider></p-divider>
+
+      <div class="mt-3">
+        <div class="flex">
+          <div class="w-9">
+            <p class="text-lg">Subtotal ({{_cartService.totalItems$ | async}} Items)</p>
+          </div>
+          <div class="w-3">
+            <p class="text-lg text-right">{{(_cartService.totalAmount$ | async)| currency:
+              'USD'}}</p>
+          </div>
+        </div>
+        <div class="flex mt-2">
+          <div class="w-9">
+            <p class="text-lg">Discount ({{CONFIG.DISCOUNT_PERCENTAGE}}%)</p>
+          </div>
+          <div class="w-3">
+            <p class="text-lg text-right">- {{(_cartService.discountAmount$ | async) |
+              currency:'USD'}}</p>
+          </div>
+        </div>
+        <div class="flex my-2">
+          <div class="w-9">
+            <p class="text-lg">Shipping Fee</p>
+          </div>
+          <div class="w-3">
+            <p class="text-lg text-right">{{((_cartService.totalItems$ | async) === 0 ? 0 :
+              CONFIG.SHIPPING_FEE) | currency:'USD'}}
+            </p>
+          </div>
+        </div>
+        <p-divider></p-divider>
+        <div class="flex mt-2">
+          <div class="w-9">
+            <p class="text-2xl font-bold">Total</p>
+          </div>
+          <div class="w-3">
+            <p class="text-2xl font-bold text-right">{{(_cartService.totalSum$| async) | currency:'USD'}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

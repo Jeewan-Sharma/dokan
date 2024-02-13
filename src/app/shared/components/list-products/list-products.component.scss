@@ -1,0 +1,48 @@
+.transition {
+  transition: 0.5s ease-out;
+}
+
+.image-box {
+  border-color: var(--gray-400);
+  &:hover {
+    .object-fit {
+      transform: scale(1.3);
+    }
+    border-color: var(--primary-500);
+  }
+}
+
+.object-fit {
+  object-fit: contain;
+}
+
+.input-custom {
+  ::ng-deep .p-inputnumber-buttons-horizontal .p-inputnumber-input {
+    width: 3rem !important ;
+  }
+  ::ng-deep
+    .p-inputnumber-buttons-horizontal
+    .p-button.p-inputnumber-button-down {
+    background-color: var(--primary-600);
+  }
+
+  ::ng-deep
+    .p-inputnumber-buttons-horizontal
+    .p-button.p-inputnumber-button-up {
+    background-color: var(--primary-600);
+  }
+  ::ng-deep .p-button.p-button-success,
+  .p-buttonset.p-button-success > .p-button,
+  .p-splitbutton.p-button-success > .p-button {
+    border: none !important;
+    width: 3rem;
+  }
+
+  ::ng-deep .p-button.p-button-danger,
+  .p-buttonset.p-button-danger > .p-button,
+  .p-splitbutton.p-button-danger > .p-button {
+    border: none !important;
+    margin: 0;
+    width: 3rem;
+  }
+}

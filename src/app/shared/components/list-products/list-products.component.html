@@ -1,0 +1,89 @@
+<div class="grid mt-2">
+  <div *ngFor="let products of products" class="col-12 md:col-6 lg:col-3 m-0 p-2">
+    <div (click)="viewDetails(products)"
+      class="image-box border-1 cursor-pointer border-round bg-gray-50 flex flex-row lg:flex-column justify-content-center align-items-center pb-0 lg:pb-2">
+      <div class="h-7rem md:h-10rem lg:h-14rem w-4 lg:w-full overflow-hidden flex justify-content-center"
+        [ngClass]="{'border-round-left': (screenSize$ | async) === 'sm' || (screenSize$ | async) === 'md', 'border-round-top': (screenSize$ | async) === 'lg'  || (screenSize$ | async) === 'xl'}">
+        <img src={{products.image}} alt="Shop Image" class="h-full w-full object-fit transition">
+      </div>
+      <div class="w-8 lg:w-11 px-2 lg:px-0 mt-1">
+        <div class="text-xl font-semibold text-800 white-space-nowrap overflow-hidden text-overflow-ellipsis">
+          {{products.title}}</div>
+        <div class="mt-1 text-700 white-space-nowrap overflow-hidden text-overflow-ellipsis">
+          {{products.description}}
+        </div>
+        <div class="text-right w-full mt-1">
+          <p class="text-xl font-semibold ">{{products.price | currency:'USD'}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<p-dialog *ngIf="(screenSize$ | async) === 'lg' || (screenSize$ | async) ==='xl'" [modal]='true'
+  [(visible)]="detailsVisibility" [style]="{width: '80vw'}">
+
+  <ng-template pTemplate="header">
+    <div class="px-3 mt-3">
+      <p class="font-semibold text-2xl">{{selectedProduct.title}}</p>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="content">
+    <app-details-view *ngIf="detailsVisibility" [product]='selectedProduct'></app-details-view>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <div class="px-3 mb-3">
+      <div class="flex justify-content-between">
+        <p class="text-4xl text-800 font-semibold mt-2">{{selectedProduct.price | currency:'USD'}}</p>
+        <div class="input-custom">
+          <p-inputNumber class="mt-2" [(ngModel)]="cartQuantity" [showButtons]="true" buttonLayout="horizontal"
+            inputId="horizontal" spinnerMode="horizontal" [step]="1" [min]="1" decrementButtonClass="p-button-danger"
+            incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
+          </p-inputNumber>
+        </div>
+      </div>
+      <div class="flex gap-2 mt-3">
+        <button (click)="addToCart()" pButton pRipple label="Add to Cart"
+          class="bg-primary-600 border-0 w-full"></button>
+        <button pButton pRipple icon="pi pi-heart" class="w-3rem p-button-outlined text-primary-600 border-2">
+        </button>
+      </div>
+    </div>
+  </ng-template>
+
+</p-dialog>
+
+<p-sidebar *ngIf="(screenSize$ | async) ==='sm' || (screenSize$ | async) === 'md'" [(visible)]="detailsVisibility"
+  position="bottom" [style]="{height:'80vh'}" (onHide)="hideDetails()" styleClass="border-round-top">
+
+  <ng-template pTemplate="header">
+    <p class="text-3xl font-bold px-2 pb-1">{{selectedProduct.title}}</p>
+  </ng-template>
+
+  <ng-template pTemplate="content">
+    <app-details-view *ngIf="detailsVisibility" [product]='selectedProduct'></app-details-view>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <div class="px-2 pb-2">
+      <div class="flex justify-content-between mt-4">
+        <p class="text-4xl text-800 font-semibold mt-2">{{selectedProduct.price | currency:'USD'}}</p>
+        <div class="input-custom">
+          <p-inputNumber class="mt-2" [(ngModel)]="cartQuantity" [showButtons]="true" buttonLayout="horizontal"
+            inputId="horizontal" spinnerMode="horizontal" [step]="1" [min]="1" decrementButtonClass="p-button-danger"
+            incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
+          </p-inputNumber>
+        </div>
+      </div>
+      <div class="flex gap-1 mt-3">
+        <button pButton pRipple icon="pi pi-heart" class="w-3rem p-button-outlined text-primary-600 border-2">
+        </button>
+        <button (click)="addToCart()" pButton pRipple label="Add to Cart"
+          class="bg-primary-600 border-primary-600 w-full"></button>
+      </div>
+    </div>
+  </ng-template>
+</p-sidebar>

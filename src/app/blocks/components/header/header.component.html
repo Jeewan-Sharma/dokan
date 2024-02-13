@@ -1,0 +1,73 @@
+<div class="py-1 px-3 lg:px-8 flex justify-content-between bg-gray-100 sticky top-0 z-5">
+  <div class="flex gap-6 align-items-center">
+    <!-- logo -->
+    <div class="flex align-items-center cursor-pointer">
+      <a routerLink="/">
+        <img [src]="ASSETS.IMAGES.LOGO" alt="DOKAN" width="50rem">
+      </a>
+    </div>
+
+    <!-- Menu Bar -->
+    <a routerLink="/" class="hidden lg:flex text-xl text-700 font-bold cursor-pointer hover-color">
+      Home</a>
+    <a routerLink="/categories"
+      class="hidden lg:flex text-xl text-700 font-bold cursor-pointer hover-color">Categories</a>
+    <a routerLink="/sale" class="hidden lg:flex text-xl text-700 font-bold cursor-pointer hover-color">Sale</a>
+    <a routerLink="/about-us" class="hidden lg:flex text-xl text-700 font-bold cursor-pointer hover-color">About
+      Us</a>
+    <a routerLink="/blog" class="hidden lg:flex text-xl text-700 font-bold cursor-pointer hover-color">Blog</a>
+  </div>
+  <!-- Right: Icon Bar -->
+  <div class="flex gap-4 align-items-center ml-3 md:ml-0">
+    <p-inputGroup>
+      <input type="text" pInputText placeholder="Search" />
+      <button type="button" pButton icon="pi pi-search" class="bg-gray-700 border-gray-700"></button>
+    </p-inputGroup>
+    <i (click)="favoritesClicked()" pBadge value="2"
+      class="pi pi-heart-fill text-700 text-3xl cursor-pointer mt-2 hover-color"></i>
+    <i (click)="cartClicked()" pBadge [value]="(_cartService.cartProducts$| async)?.length?.toString() || ''"
+      class="pi pi-shopping-cart text-700 text-3xl cursor-pointer mt-2 hover-color"></i>
+    <i (click)="openSideMenu()" class="lg:hidden pi pi-bars text-700 text-2xl cursor-pointer mt-2 hover-color"></i>
+  </div>
+</div>
+
+<p-sidebar header="Menu" *ngIf="(_deviceWidthService.screenSize$ | async) === 'sm' || 'md'" [(visible)]="menuVisibility"
+  [style]="{width:'50vw'}" position="right">
+  <ng-template pTemplate="headless">
+    <div class="flex pl-4 pr-2 pt-1 justify-content-between align-items-center">
+      <div class="flex gap-2 align-items-center">
+        <img [src]="ASSETS.IMAGES.LOGO" alt="DOKAN" width="30rem">
+        <p class="text-3xl font-bold text-primary-600">Dokan</p>
+      </div>
+      <i (click)="closeSidebar()" class="pi pi-times-circle text-4xl"></i>
+    </div>
+    <div class="flex flex-column mt-5">
+      <a routerLink="/">
+        <div class="pl-4 md:pl-8 pt-2 text-2xl text-primary-600 border-primary-300 font-semibold border-top-1">
+          Home
+        </div>
+      </a>
+      <a routerLink="/categories">
+        <div class="pl-4 md:pl-8 pt-2 mt-3 text-2xl text-primary-600 border-primary-300 font-semibold border-top-1">
+          Categories
+        </div>
+      </a>
+      <a routerLink="/sale">
+        <div class="pl-4 md:pl-8 pt-2 mt-3 text-2xl text-primary-600 border-primary-300 font-semibold border-top-1">
+          Sale
+        </div>
+      </a>
+      <a routerLink="/about-us">
+        <div class="pl-4 md:pl-8 pt-2 mt-3 text-2xl text-primary-600 border-primary-300 font-semibold border-top-1">
+          About Us
+        </div>
+      </a>
+      <a routerLink="/blog">
+        <div
+          class="pl-4 md:pl-8 pt-2 pb-3 mt-3 text-2xl text-primary-600 border-primary-300 font-semibold border-top-1 border-bottom-1">
+          Blog
+        </div>
+      </a>
+    </div>
+  </ng-template>
+</p-sidebar>
