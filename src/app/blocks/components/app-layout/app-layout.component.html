@@ -22,7 +22,7 @@
   <ng-template pTemplate="footer">
     <div class="px-2 pb-2">
       <button [disabled]="(_cartService.cartProducts$ | async)?.length === 0" (click)="proceedToCheckout()" pButton
-        pRipple label="Proceed to Checkout" class="bg-primary-600 border-primary-600 w-full mt-3"></button>
+        pRipple label="Proceed to Checkout" class="w-full mt-3"></button>
     </div>
   </ng-template>
 </p-dialog>
@@ -45,7 +45,7 @@
   <ng-template pTemplate="footer">
     <div class="px-2 pb-2">
       <button [disabled]="(_cartService.cartProducts$ | async)?.length === 0" (click)="proceedToCheckout()" pButton
-        pRipple label="Proceed to Checkout" class="bg-primary-600 border-primary-600 w-full mt-3"></button>
+        pRipple label="Proceed to Checkout" class="w-full mt-3"></button>
     </div>
   </ng-template>
 </p-sidebar>

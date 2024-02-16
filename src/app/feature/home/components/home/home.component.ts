@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ASSETS } from '@core/consts';
 import { EPageState } from '@core/enums';
-import { DeviceWidthService, LoaderService } from '@core/services';
+import { DeviceWidthService, LoaderService, ToastService } from '@core/services';
 import { ProductsService } from 'src/app/core/services/products.service';
 
 @Component({
@@ -21,7 +21,8 @@ export class HomeComponent implements OnInit {
   constructor(
     protected _deviceWidthService: DeviceWidthService,
     private _loaderService: LoaderService,
-    private _productService: ProductsService
+    private _productService: ProductsService,
+    private _toastService: ToastService,
   ) { }
 
   async ngOnInit() {
@@ -39,9 +40,9 @@ export class HomeComponent implements OnInit {
         this.pageState = EPageState.SUCCESS;
       }
     } catch (err) {
-      // this._toastService.showError({
-      //   message: STRINGS.IMAGEFINDER.GET_IMAGELIST_FAILED,
-      // });
+      this._toastService.showError({
+        message: "Error in loading Products",
+      });
       this.pageState = EPageState.ERROR;
     }
     finally {

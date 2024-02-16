@@ -11,14 +11,16 @@ export class LoaderService {
   constructor() { }
 
   showLoader() {
-    this.loading$.next(true);
-    // setTimeout(() => {
-    // });
+    setTimeout(() => {
+      this.loading$.next(true);
+    });
+    console.log('show loader is called')
   }
 
   hideLoader() {
     setTimeout(() => {
       this.loading$.next(false);
     });
+    console.log('hide loader is called')
   }
 }
