@@ -15,7 +15,6 @@ export const routes: Routes = [
         path: 'checkout',
         loadChildren: () => import('./feature/checkout/checkout.module').then((m) => m.CheckoutModule)
       },
-      { path: '**', redirectTo: '' }
     ]
   },
   {
@@ -23,5 +22,5 @@ export const routes: Routes = [
     loadChildren: () => import('./feature/auth/auth.module').then((m) => m.AuthModule),
     canActivate: [preventAuthGuard]
   },
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: 'home' }
 ];
