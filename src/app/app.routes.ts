@@ -22,5 +22,6 @@ export const routes: Routes = [
     loadChildren: () => import('./feature/auth/auth.module').then((m) => m.AuthModule),
     canActivate: [preventAuthGuard]
   },
-  { path: '**', redirectTo: 'home' }
+  { path: '**', redirectTo: '' },
+  { path: '', redirectTo: '' }
 ];

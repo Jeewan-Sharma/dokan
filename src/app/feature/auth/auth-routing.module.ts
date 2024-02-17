@@ -18,6 +18,8 @@ const routes: Routes = [
         component: RegisterComponent,
       },
       { path: '**', redirectTo: '/auth/login' },
+      { path: '', redirectTo: '/auth/login' },
+
     ]
   }
 ];
