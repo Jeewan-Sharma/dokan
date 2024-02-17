@@ -1,0 +1,9 @@
+.p-button {
+  background-color: var(--primary-600);
+  border-color: var(--primary-600);
+}
+
+.p-button.p-button-outlined {
+  background-color: transparent;
+  color: var(--primary-600);
+}

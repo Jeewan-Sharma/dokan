@@ -6,7 +6,6 @@
         <img [src]="ASSETS.IMAGES.LOGO" alt="DOKAN" width="50rem">
       </a>
     </div>
-
     <!-- Menu Bar -->
     <a routerLink="/" class="hidden lg:flex text-xl text-700 font-bold cursor-pointer hover-color">
       Home</a>
@@ -27,7 +26,9 @@
       class="pi pi-heart-fill text-700 text-3xl cursor-pointer mt-2 hover-color"></i>
     <i (click)="cartClicked()" pBadge [value]="(_cartService.cartProducts$| async)?.length?.toString() || ''"
       class="pi pi-shopping-cart text-700 text-3xl cursor-pointer mt-2 hover-color"></i>
-    <i (click)="openSideMenu()" class="lg:hidden pi pi-bars text-700 text-2xl cursor-pointer mt-2 hover-color"></i>
+    <i (click)="op.toggle($event)"
+      class="pi pi-user text-lg font-bold text-700 border-2 border-700 border-circle p-1 cursor-pointer mt-2 hover-color hover:border-primary-500"></i>
+    <i (click)="openSideMenu()" class="lg:hidden pi pi-bars text-700 text-2xl mt-2"></i>
   </div>
 </div>
 
@@ -71,3 +72,35 @@
     </div>
   </ng-template>
 </p-sidebar>
+
+<p-overlayPanel #op>
+  <ng-template pTemplate="content">
+    <div *ngIf="loginCredential.loginStatus" class="p-2">
+      <div class="flex align-items-center gap-2 p-2 bg-gray-200 border-round">
+        <p class="py-1 px-2 text-white border-circle font-bold bg-primary-600 text-3xl">
+          {{loginCredential.firstName?.charAt(0)}}{{loginCredential.lastName?.charAt(0)}}</p>
+        <div>
+          <p class="text-xl font-bold text-700">{{loginCredential.firstName}} {{loginCredential.lastName}}</p>
+          <p class="text-sm text-700">{{loginCredential.email}}</p>
+        </div>
+      </div>
+      <div class="py-2 px-4 mt-1 flex gap-3 align-items-center cursor-pointer border-round hover-effect">
+        <i class="text-xl pi pi-user"></i>
+        <p class="text-lg">Profile</p>
+      </div>
+      <div class="py-2 px-4 mt-1 flex gap-3 align-items-center cursor-pointer border-round hover-effect">
+        <i class="text-xl pi pi-cog"></i>
+        <p class="text-lg">Settings and Privacy</p>
+      </div>
+      <div (click)="logout()" class="py-2 px-4 flex gap-3 align-items-center cursor-pointer border-round hover-effect">
+        <i class="text-xl pi pi-sign-out"></i>
+        <p class="text-lg">Logout</p>
+      </div>
+    </div>
+    <div *ngIf="!loginCredential.loginStatus" class="p-2">
+      <div class="py-2 px-4 mt-1 cursor-pointer bg-primary-600 border-round">
+        <p (click)="routeToLogin()" class="text-lg text-white">Login or Register</p>
+      </div>
+    </div>
+  </ng-template>
+</p-overlayPanel>

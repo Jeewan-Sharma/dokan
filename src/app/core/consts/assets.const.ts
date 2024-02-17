@@ -9,8 +9,9 @@ const IMAGES = {
   WATCHES: `${IMAGE_BASE}/modals/watches.png`,
   MEN: `${IMAGE_BASE}/modals/men.png`,
   EMPTY_CART: `${IMAGE_BASE}/emptyCart.png`,
+  AUTH_BACKGROUND: `${IMAGE_BASE}/authBackground.png`,
+  AUTH_BANNER: `${IMAGE_BASE}/authBanner.jpg`,
 }
-
 
 // Main Export
 export const ASSETS = {

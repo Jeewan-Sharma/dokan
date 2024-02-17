@@ -11,9 +11,9 @@ export class LoaderService {
   constructor() { }
 
   showLoader() {
-    this.loading$.next(true);
-    // setTimeout(() => {
-    // });
+    setTimeout(() => {
+      this.loading$.next(true);
+    });
   }
 
   hideLoader() {
