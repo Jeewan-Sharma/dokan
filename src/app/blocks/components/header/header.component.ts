@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit {
 
   menuVisibility: boolean = false;
   loginCredential!: IRememberMeData;
+  loginStatus: boolean = false;
 
   constructor(
     public _router: Router,
@@ -32,6 +33,7 @@ export class HeaderComponent implements OnInit {
 
   async getLoginStatus() {
     this.loginCredential = await this._localHostDataService.getLoginStatusAndCredential();
+    this.loginStatus = this.loginCredential.loginStatus;
   }
 
   cartClicked() {
