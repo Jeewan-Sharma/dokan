@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ASSETS } from '@core/consts';
-import { ILoginCredentials, IMessage } from '@core/models';
+import { ILoginCredentials, IMessage, IRegisterCredentials } from '@core/models';
 import { AuthService, DeviceWidthService, LoaderService, LocalHostDataService } from '@core/services';
 
 @Component({
@@ -74,12 +74,12 @@ export class LoginComponent implements OnInit {
       };
 
       const rememberMe = this.loginForm.controls['rememberMe'].value;
-      const res: boolean = await this._authService.login(credentialState)
+      const res: IRegisterCredentials = await this._authService.login(credentialState)
       if (res) {
         if (rememberMe) {
-          this._localHostDataService.setLoginStatusAndCredentials(rememberMe, credentialState.email, credentialState.password, true)
+          this._localHostDataService.setLoginStatusAndCredentials(rememberMe, res.firstName, res.lastName, credentialState.email, res.phone, credentialState.password, true)
         } else {
-          this._localHostDataService.setLoginStatusAndCredentials(rememberMe, null, null, true)
+          this._localHostDataService.setLoginStatusAndCredentials(rememberMe, null, null, null, null, null, true)
         }
         this.navigateToHome()
       } else {

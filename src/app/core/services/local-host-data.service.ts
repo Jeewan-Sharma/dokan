@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IRegisterCredentials } from '@core/models';
+import { IRegisterCredentials, IRememberMeData } from '@core/models';
 
 @Injectable({
   providedIn: 'root'
@@ -26,14 +26,49 @@ export class LocalHostDataService {
     localStorage.setItem('DokanCredentials', newDataJSON);
   }
 
-  setLoginStatusAndCredentials(rememberMeStatus: boolean, email: string | null, password: string | null, loginStatus: boolean) {
-    const rememberMeData = {
+  setLoginStatusAndCredentials(rememberMeStatus: boolean, firstName: string | null, lastName: string | null, email: string | null, phone: number | null, password: string | null, loginStatus: boolean) {
+    const rememberMeData: IRememberMeData = {
+      firstName: firstName,
+      lastName: lastName,
       status: rememberMeStatus,
       email: email,
+      phone: phone,
       password: password,
       loginStatus: loginStatus
     }
     const newDataJSON = JSON.stringify(rememberMeData);
     localStorage.setItem('DokanLoginData', newDataJSON);
+  }
+
+  getLoginStatusAndCredential() {
+    return new Promise<IRememberMeData>(async (resolve, reject) => {
+      try {
+        const storedJSON = localStorage.getItem('DokanLoginData');
+        if (storedJSON) {
+          const storedLoginData: IRememberMeData = JSON.parse(storedJSON);
+          resolve(storedLoginData)
+        }
+      } catch (e) {
+        throw e
+      }
+    }
+    )
+  }
+
+  setLogoutStatus() {
+    return new Promise<boolean>(async (resolve, reject) => {
+      try {
+        const storedJSON = localStorage.getItem('DokanLoginData');
+        if (storedJSON) {
+          const storedLoginData: IRememberMeData = JSON.parse(storedJSON);
+          storedLoginData.loginStatus = false
+          await this.setLoginStatusAndCredentials(storedLoginData.status, storedLoginData.firstName, storedLoginData.lastName, storedLoginData.email, storedLoginData.phone, storedLoginData.password, storedLoginData.loginStatus)
+          resolve(true)
+        }
+      } catch (e) {
+        reject(false)
+        throw e
+      }
+    })
   }
 }

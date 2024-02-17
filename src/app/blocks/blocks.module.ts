@@ -4,10 +4,10 @@ import { BlocksRoutingModule } from './blocks-routing.module';
 import { AppLayoutComponent } from './components/app-layout/app-layout.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
-import { LoaderComponent } from './components/loader/loader.component';
 import { AnnouncementComponent } from './components/announcement/announcement.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { CartComponent } from '../shared/components/cart/cart.component';
+import { LoaderComponent } from '../shared/components/loader/loader.component';
 
 import { ToastModule } from 'primeng/toast';
 import { ProgressSpinnerModule } from 'primeng/progressspinner'
@@ -17,6 +17,7 @@ import { InputGroupModule } from 'primeng/inputgroup';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { BadgeModule } from 'primeng/badge';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 const primengModules = [
   ToastModule,
@@ -26,7 +27,8 @@ const primengModules = [
   InputGroupModule,
   InputTextModule,
   ButtonModule,
-  BadgeModule
+  BadgeModule,
+  OverlayPanelModule,
 ]
 
 @NgModule({
@@ -34,7 +36,6 @@ const primengModules = [
     AppLayoutComponent,
     FooterComponent,
     HeaderComponent,
-    LoaderComponent,
     AnnouncementComponent,
     ToastComponent
   ],
@@ -43,6 +44,7 @@ const primengModules = [
     BlocksRoutingModule,
     CartComponent,
     primengModules,
+    LoaderComponent,
   ]
 })
 export class BlocksModule { }

@@ -12,6 +12,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { InputMaskModule } from 'primeng/inputmask';
+import { LoaderComponent } from '../../shared/components/loader/loader.component';
 
 
 const PrimeNgModules = [InputTextModule, CheckboxModule, DialogModule, ButtonModule, InputMaskModule]
@@ -28,6 +29,7 @@ const PrimeNgModules = [InputTextModule, CheckboxModule, DialogModule, ButtonMod
     AuthRoutingModule,
     ReactiveFormsModule,
     PrimeNgModules,
+    LoaderComponent,
   ]
 })
 export class AuthModule { }

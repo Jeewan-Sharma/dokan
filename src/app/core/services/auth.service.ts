@@ -11,16 +11,20 @@ export class AuthService {
     private _localHostDataService: LocalHostDataService
   ) { }
 
-  login(credentials: ILoginCredentials): Promise<boolean> {
+  login(enteredCredentials: ILoginCredentials): Promise<IRegisterCredentials> {
     return new Promise(async (resolve, reject) => {
       try {
         const StoredCredentials = await this._localHostDataService.getCredentials()
-        const isMatch = StoredCredentials.some(credential => {
-          return credential.email === credentials.email && credential.password === credentials.password;
+        const matchedCredential = StoredCredentials.find(credential => {
+          return credential.email === enteredCredentials.email && credential.password === enteredCredentials.password;
         });
-        setTimeout(() => {
-          resolve(isMatch);
-        }, 3000);
+        if (matchedCredential) {
+          setTimeout(() => {
+            resolve(matchedCredential);
+          }, 3000);
+        } else {
+          reject(new Error("Credentials not found")); // Reject the promise with an error if no match is found
+        }
       } catch (e) {
         reject(e);
       }

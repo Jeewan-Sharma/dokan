@@ -122,8 +122,8 @@ export class RegisterComponent implements OnInit {
       }
       this._loaderService.showLoader()
       const credentialState: IRegisterCredentials = {
-        firstName: this.registerForm.controls['firstName'].value,
-        lastName: this.registerForm.controls['lastName'].value,
+        firstName: this.capitalizeFirstLetter(this.registerForm.controls['firstName'].value),
+        lastName: this.capitalizeFirstLetter(this.registerForm.controls['lastName'].value),
         email: this.registerForm.controls['email'].value,
         phone: this.registerForm.controls['phone'].value,
         password: this.registerForm.controls['password'].value,
@@ -150,5 +150,9 @@ export class RegisterComponent implements OnInit {
 
   openDialog() {
     this.showResponse = true;
+  }
+
+  capitalizeFirstLetter(string: string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 }
