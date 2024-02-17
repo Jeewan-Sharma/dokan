@@ -55,7 +55,7 @@ export class HeaderComponent implements OnInit {
     try {
       const res = await this._localHostDataService.setLogoutStatus()
       if (res) {
-        this._router.navigate(['/auth'])
+        this._router.navigate(['/auth/login'])
       }
     } catch (e) {
       throw e
@@ -63,6 +63,6 @@ export class HeaderComponent implements OnInit {
   }
 
   routeToLogin() {
-    this._router.navigate(['/auth'])
+    this._router.navigate(['/auth/login'])
   }
 }
