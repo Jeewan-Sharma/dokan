@@ -82,12 +82,10 @@ export class LoginComponent implements OnInit {
           this._localHostDataService.setLoginStatusAndCredentials(rememberMe, null, null, null, null, null, true)
         }
         this.navigateToHome()
-      } else {
-        this.message = this.loginFailedMessage
-        this.openDialog()
       }
     } catch (e) {
-      throw e
+      this.message = this.loginFailedMessage
+      this.openDialog()
     } finally {
       this._loaderService.hideLoader()
     }

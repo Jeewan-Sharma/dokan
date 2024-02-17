@@ -23,7 +23,7 @@ export class AuthService {
             resolve(matchedCredential);
           }, 3000);
         } else {
-          reject(new Error("Credentials not found")); // Reject the promise with an error if no match is found
+          reject(new Error("Credentials not found"));
         }
       } catch (e) {
         reject(e);

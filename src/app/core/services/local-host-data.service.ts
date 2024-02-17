@@ -12,7 +12,6 @@ export class LocalHostDataService {
     return new Promise<IRegisterCredentials[]>((resolve, reject) => {
       try {
         const storedJSON = localStorage.getItem('DokanCredentials');
-        // convert back to array
         const storedCredentials: IRegisterCredentials[] = storedJSON ? JSON.parse(storedJSON) : [];
         resolve(storedCredentials)
       } catch (e) {
@@ -44,10 +43,8 @@ export class LocalHostDataService {
     return new Promise<IRememberMeData>(async (resolve, reject) => {
       try {
         const storedJSON = localStorage.getItem('DokanLoginData');
-        if (storedJSON) {
-          const storedLoginData: IRememberMeData = JSON.parse(storedJSON);
-          resolve(storedLoginData)
-        }
+        const storedLoginData: IRememberMeData = storedJSON ? JSON.parse(storedJSON) : { status: false, firstName: null, lastName: null, email: null, phone: null, password: null, loginStatus: false };
+        resolve(storedLoginData)
       } catch (e) {
         throw e
       }
