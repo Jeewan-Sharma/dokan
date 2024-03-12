@@ -78,6 +78,7 @@ export class CartService {
 
   clearCartProducts() {
     localStorage.setItem('DokanCartProducts', '');
+    this.cartProductsSubject.next([]);
   }
 
   calculateSums() {
@@ -93,11 +94,20 @@ export class CartService {
       map(total => total * CONFIG.DISCOUNT_PERCENTAGE / 100)
     );
 
-    const shippingCharge = CONFIG.SHIPPING_FEE;
+    const shippingCharge = 0;
 
-    this.totalSum$ = combineLatest([this.totalAmount$, this.discountAmount$]).pipe(
-      map(([totalAmount, discountAmount]) => totalAmount - discountAmount + shippingCharge)
-    );
+    if (this.cartProducts$)
+
+      this.totalSum$ = combineLatest([this.totalAmount$, this.discountAmount$]).pipe(
+        map(([totalAmount, discountAmount]) => {
+          let shippingCharge = 0;
+          if (this.cartProducts$) {
+            const productsCount = this.cartProductsSubject.value.length;
+            shippingCharge = productsCount > 1 ? CONFIG.SHIPPING_FEE : 0;
+          }
+          return totalAmount - discountAmount + shippingCharge
+        })
+      );
   }
 
 }

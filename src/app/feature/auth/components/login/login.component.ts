@@ -21,13 +21,13 @@ export class LoginComponent implements OnInit {
   message!: IMessage;
 
   formInvalidMessage: IMessage = {
-    image: "https://s3.us-east-2.amazonaws.com/cloudimagehost/order-failed.png",
+    image: ASSETS.IMAGES.ERROR,
     title: 'Form Invalid!',
     description: 'Please check all the required fields of the form',
   };
 
   loginFailedMessage: IMessage = {
-    image: "https://s3.us-east-2.amazonaws.com/cloudimagehost/order-failed.png",
+    image: ASSETS.IMAGES.ERROR,
     title: 'Invalid Credentials!',
     description: 'Please check the credentials and try again.',
   };
@@ -44,6 +44,10 @@ export class LoginComponent implements OnInit {
   async ngOnInit() {
     await this.initForm()
     this.patchRememberMe()
+  }
+
+  get screenSize$() {
+    return this._deviceWidthService.screenSize$;
   }
 
   initForm() {

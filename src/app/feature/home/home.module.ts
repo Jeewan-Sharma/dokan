@@ -5,7 +5,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeRootComponent } from './components/home-root/home-root.component';
 import { HomeComponent } from './components/home/home.component';
 import { ButtonModule } from 'primeng/button';
-import { ListProductsComponent } from '@shared/components';
+import { ListProductsComponent, LoadingListComponent } from '@shared/components';
 
 @NgModule({
   declarations: [HomeRootComponent, HomeComponent],
@@ -14,6 +14,7 @@ import { ListProductsComponent } from '@shared/components';
     HomeRoutingModule,
     ButtonModule,
     ListProductsComponent,
+    LoadingListComponent
   ]
 })
 export class HomeModule { }

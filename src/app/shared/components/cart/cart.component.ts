@@ -67,5 +67,4 @@ export class CartComponent {
   cancelDelete() {
     this.confirmVisibility = false;
   }
-
 }

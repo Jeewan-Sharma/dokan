@@ -20,9 +20,17 @@
     <app-cart *ngIf="cartVisibility"></app-cart>
   </div>
   <ng-template pTemplate="footer">
-    <div class="px-2 pb-2">
-      <button [disabled]="(_cartService.cartProducts$ | async)?.length === 0" (click)="proceedToCheckout()" pButton
-        pRipple label="Proceed to Checkout" class="w-full mt-3"></button>
+    <div class="grid">
+      <div class="col-12 lg:col-8 mt-4">
+        <div class="flex justify-content-between ">
+          <p class="text-xl text-800 font-bold pl-6">Total Items</p>
+          <p class="text-2xl text-800 font-bold pr-6">{{(_cartService.totalItems$| async)}}</p>
+        </div>
+      </div>
+      <div class="col-12 lg:col-4 pr-4">
+        <button [disabled]="(_cartService.cartProducts$ | async)?.length === 0" (click)="proceedToCheckout()" pButton
+          pRipple label="Proceed to Checkout" class="w-full mt-3"></button>
+      </div>
     </div>
   </ng-template>
 </p-dialog>

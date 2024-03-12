@@ -19,7 +19,7 @@
 
     <div *ngIf="(cartProducts$ | async) as cartProducts">
       <div *ngFor="let cartProduct of cartProducts" class="border-1 border-300 border-round bg-gray-100 mb-2">
-        <div class="grid m-0 px-3 pt-3 pb-3 lg:pb-0 lg:pt-2">
+        <div class="grid m-0 p-3 lg:pb-0 lg:pt-2">
           <div class="col-3 lg:col-1">
             <div class="h-5rem w-full overflow-hidden border-round ">
               <img src={{cartProduct.image}} alt="Shop Image" class="object-fit h-full w-full">

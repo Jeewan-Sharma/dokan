@@ -13,9 +13,10 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { InputMaskModule } from 'primeng/inputmask';
 import { LoaderComponent } from '../../shared/components/loader/loader.component';
+import { SidebarModule } from 'primeng/sidebar';
 
 
-const PrimeNgModules = [InputTextModule, CheckboxModule, DialogModule, ButtonModule, InputMaskModule]
+const PrimeNgModules = [InputTextModule, CheckboxModule, DialogModule, SidebarModule, ButtonModule, InputMaskModule]
 
 
 @NgModule({

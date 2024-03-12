@@ -2,7 +2,7 @@
   <div *ngFor="let products of products" class="col-12 md:col-6 lg:col-3 m-0 p-2">
     <div (click)="viewDetails(products)"
       class="image-box border-1 cursor-pointer border-round bg-gray-50 flex flex-row lg:flex-column justify-content-center align-items-center pb-0 lg:pb-2">
-      <div class="h-7rem md:h-10rem lg:h-14rem w-4 lg:w-full overflow-hidden flex justify-content-center"
+      <div class="p-2 h-7rem md:h-10rem lg:h-14rem w-4 lg:w-full overflow-hidden flex justify-content-center"
         [ngClass]="{'border-round-left': (screenSize$ | async) === 'sm' || (screenSize$ | async) === 'md', 'border-round-top': (screenSize$ | async) === 'lg'  || (screenSize$ | async) === 'xl'}">
         <img src={{products.image}} alt="Shop Image" class="h-full w-full object-fit transition">
       </div>

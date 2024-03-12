@@ -3,7 +3,7 @@ import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from
 import { Router } from '@angular/router';
 import { ASSETS } from '@core/consts';
 import { IMessage, IRegisterCredentials } from '@core/models';
-import { AuthService, LoaderService } from '@core/services';
+import { AuthService, DeviceWidthService, LoaderService } from '@core/services';
 
 @Component({
   selector: 'app-register',
@@ -22,19 +22,19 @@ export class RegisterComponent implements OnInit {
   message!: IMessage;
 
   formInvalidMessage: IMessage = {
-    image: "https://s3.us-east-2.amazonaws.com/cloudimagehost/order-failed.png",
+    image: ASSETS.IMAGES.ERROR,
     title: 'Form Invalid!',
     description: 'Please check all the required fields of the form',
   };
 
   registrationFailedMessage: IMessage = {
-    image: "https://s3.us-east-2.amazonaws.com/cloudimagehost/order-failed.png",
+    image: ASSETS.IMAGES.ERROR,
     title: 'Registration Failed!',
     description: 'The Email you have entered is already in use.',
   };
 
   registrationSuccessMessage: IMessage = {
-    image: "https://s3.us-east-2.amazonaws.com/cloudimagehost/success.png",
+    image: ASSETS.IMAGES.SUCCESS,
     title: 'Congratulations!',
     description: 'Registration successful you can Login now.',
   };
@@ -43,6 +43,7 @@ export class RegisterComponent implements OnInit {
     private _router: Router,
     private _loaderService: LoaderService,
     private _authService: AuthService,
+    private _deviceWidthService: DeviceWidthService,
   ) { }
 
   async ngOnInit() {
@@ -70,6 +71,10 @@ export class RegisterComponent implements OnInit {
         ]),
       }
     );
+  }
+
+  get screenSize$() {
+    return this._deviceWidthService.screenSize$;
   }
 
   // custom validator for password check

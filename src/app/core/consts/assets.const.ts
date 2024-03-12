@@ -11,6 +11,8 @@ const IMAGES = {
   EMPTY_CART: `${IMAGE_BASE}/emptyCart.png`,
   AUTH_BACKGROUND: `${IMAGE_BASE}/authBackground.png`,
   AUTH_BANNER: `${IMAGE_BASE}/authBanner.jpg`,
+  ERROR: `${IMAGE_BASE}/error.png`,
+  SUCCESS: `${IMAGE_BASE}/success.png`
 }
 
 // Main Export

@@ -26,28 +26,28 @@
 
       <div class="mt-3">
         <div class="flex">
-          <div class="w-9">
+          <div class="w-6">
             <p class="text-lg">Subtotal ({{_cartService.totalItems$ | async}} Items)</p>
           </div>
-          <div class="w-3">
+          <div class="w-6">
             <p class="text-lg text-right">{{(_cartService.totalAmount$ | async)| currency:
               'USD'}}</p>
           </div>
         </div>
         <div class="flex mt-2">
-          <div class="w-9">
+          <div class="w-6">
             <p class="text-lg">Discount ({{CONFIG.DISCOUNT_PERCENTAGE}}%)</p>
           </div>
-          <div class="w-3">
+          <div class="w-6">
             <p class="text-lg text-right">- {{(_cartService.discountAmount$ | async) |
               currency:'USD'}}</p>
           </div>
         </div>
         <div class="flex my-2">
-          <div class="w-9">
+          <div class="w-6">
             <p class="text-lg">Shipping Fee</p>
           </div>
-          <div class="w-3">
+          <div class="w-6">
             <p class="text-lg text-right">{{((_cartService.totalItems$ | async) === 0 ? 0 :
               CONFIG.SHIPPING_FEE) | currency:'USD'}}
             </p>
@@ -55,10 +55,10 @@
         </div>
         <p-divider></p-divider>
         <div class="flex mt-2">
-          <div class="w-9">
+          <div class="w-4">
             <p class="text-2xl font-bold">Total</p>
           </div>
-          <div class="w-3">
+          <div class="w-8">
             <p class="text-2xl font-bold text-right">{{(_cartService.totalSum$| async) | currency:'USD'}}</p>
           </div>
         </div>
@@ -102,7 +102,12 @@
           </div>
           <div class="mt-2 col-6">
             <p class="text-700 text-lg mb-1">Expiry Date<span class="text-red-600">*</span></p>
-            <p-calendar [minDate]="today" formControlName="expiryDate" styleClass="w-full"></p-calendar>
+            <!-- <p-calendar [minDate]="today" formControlName="expiryDate" styleClass="w-full"></p-calendar> -->
+
+            <p-calendar formControlName="expiryDate" view="month" dateFormat="mm/yy" [readonlyInput]="true"
+              styleClass="w-full" [minDate]="today"></p-calendar>
+
+
             <div *ngIf="paymentDetailForm.get('expiryDate')?.invalid && paymentDetailForm.get('expiryDate')?.touched">
               <p class="text-red-500">Expiry Date is required.</p>
             </div>
@@ -118,8 +123,32 @@
         <button (click)="checkout()" pButton pRipple label="Checkout"
           class="mt-3 w-full bg-primary-600 border-primary-600"></button>
       </form>
-
-
     </div>
   </div>
 </div>
+
+<p-dialog (onHide)="navigateToHome()" *ngIf="(screenSize$ | async) === 'lg' || (screenSize$ | async) === 'xl'"
+  class="header-less-dialog" [modal]='true' [(visible)]="responseVisibility" [style]="{width: '30vw'}"
+  [breakpoints]="{ '768px': '100vw'}">
+  <div class="p-3">
+    <p class="text-3xl text-center text-800 font-bold">Order Successful</p>
+    <img [src]=ASSETS.IMAGES.SUCCESS alt="">
+    <button (click)="navigateToHome()" pButton pRipple label="Okay"
+      class="w-full bg-primary-600 border-primary-600"></button>
+  </div>
+</p-dialog>
+
+<p-sidebar (onHide)="navigateToHome()" *ngIf="(screenSize$ | async) === 'sm' || (screenSize$ | async) === 'md'"
+  [(visible)]="responseVisibility" position="bottom" [style]="{height:'50vh'}" styleClass="border-round-top"
+  [modal]="false">
+  <ng-template pTemplate="content">
+    <p class="text-3xl text-center text-800 font-bold mt-2">Order Successful</p>
+    <img [src]=ASSETS.IMAGES.SUCCESS alt="">
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <div class="px-2 pb-2">
+      <button (click)="navigateToHome()" pButton pRipple label="Okay"
+        class="w-full bg-primary-600 border-primary-600"></button>
+    </div>
+  </ng-template>
+</p-sidebar>

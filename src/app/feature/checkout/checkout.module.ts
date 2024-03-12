@@ -11,8 +11,10 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { CalendarModule } from 'primeng/calendar';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { DialogModule } from 'primeng/dialog';
+import { SidebarModule } from 'primeng/sidebar';
 
-const primeNgModules = [DividerModule, InputMaskModule, CalendarModule, ButtonModule, InputTextModule]
+const primeNgModules = [DividerModule, InputMaskModule, CalendarModule, ButtonModule, InputTextModule, DialogModule, SidebarModule]
 
 @NgModule({
   declarations: [CheckoutRootComponent, CheckoutComponent],
