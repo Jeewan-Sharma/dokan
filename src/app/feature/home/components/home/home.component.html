@@ -1,10 +1,10 @@
 <!-- Banner -->
 <div class="grid m-0 bg-primary-50 flex align-items-center">
   <div class="col-7 p-0 pb-2 text-right">
-    <p class="text-4xl text-800 font-bold">Unlock Your Wardrobe's Potential at Dokan</p>
-    <p class="mt-3 font-semibold text-xl">Let Your Style Speak Volumes with Our Brands</p>
-    <p-button label="Explore" icon="pi pi-arrow-right" iconPos="right"
-      styleClass="mt-3 bg-primary-600 border-primary-600 hover-pop"></p-button>
+    <p class="mt-2 md:mt-0 text-xl md:text-3xl lg:text-4xl text-800 font-bold">Unlock Your Wardrobe's Potential at Dokan
+    </p>
+    <p class="mt-1 md:mt-3 font-semibold text-xl">Let Your Style Speak Volumes with Our Brands</p>
+    <p-button label="Explore" styleClass="mt-3 bg-primary-600 border-primary-600 hover-pop"></p-button>
   </div>
   <div class="col-5 p-0 flex align-items-baseline justify-content-center md:justify-content-start pt-3">
     <img [src]="ASSETS.IMAGES.BANNER_LADY" alt="lady" height="320rem"
@@ -97,6 +97,15 @@
   <!-- product section -->
   <div class="mb-5">
     <p class="text-center text-2xl font-bold mt-5">Top sells</p>
-    <app-list-products [products]="apiData"></app-list-products>
+    <ng-container *ngIf="pageState$ | async as currentState">
+      <ng-container [ngSwitch]="currentState">
+        <ng-container *ngSwitchCase="ePageState.LOADING">
+          <app-loading-list></app-loading-list>
+        </ng-container>
+        <ng-container *ngSwitchCase="ePageState.SUCCESS">
+          <app-list-products [products]="apiData"></app-list-products>
+        </ng-container>
+      </ng-container>
+    </ng-container>
   </div>
 </div>

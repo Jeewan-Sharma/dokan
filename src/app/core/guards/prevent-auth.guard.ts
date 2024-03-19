@@ -6,7 +6,6 @@ import { LocalHostDataService } from '@core/services';
 export const preventAuthGuard: CanActivateFn = async (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const _localHostDataService = inject(LocalHostDataService);
   const _router = inject(Router)
-  let loginStatus;
   const loginCredential = await _localHostDataService.getLoginStatusAndCredential()
   if (loginCredential.loginStatus == false) {
     return true;

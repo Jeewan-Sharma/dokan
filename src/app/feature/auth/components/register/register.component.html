@@ -1,4 +1,4 @@
-<div class="flex justify-content-center align-items-center min-h-screen py-6 md:py-0">
+<div class="flex justify-content-center align-items-center min-h-screen py-6">
   <div class="grid w-11 lg:w-9 border-round-lg box-shadow-1">
     <div
       class="col-12 md:col-5 flex flex-column justify-content-center align-items-center bg-orange-100 lg:border-round-left-lg">
@@ -86,9 +86,10 @@
 
 
 <!-- response dialog -->
-<p-dialog *ngIf="showResponse" class="registerResponse" [(visible)]="showResponse" [modal]="true"
-  [style]="{width: '30vw'}" [draggable]="false" [breakpoints]="{'767px': '100vw'}">
-  <div class="text-center">
+<p-dialog *ngIf="(screenSize$ | async) ==='lg' || (screenSize$ | async) === 'xl'" class="registerResponse"
+  [(visible)]="showResponse" [modal]="true" [style]="{width: '30vw'}" [draggable]="false"
+  [breakpoints]="{'767px': '100vw'}">
+  <div *ngIf="message" class="text-center">
     <img [src]="message.image" alt="Failed" class="w-2 h-2">
     <p class="font-bold text-4xl">{{message.title}}</p>
     <p class="text-xl text-700 mt-1">{{message.description}}</p>
@@ -104,3 +105,22 @@
     </div>
   </ng-template>
 </p-dialog>
+
+<p-sidebar *ngIf="(screenSize$ | async) ==='sm' || (screenSize$ | async) === 'md'" [(visible)]="showResponse"
+  position="bottom" [style]="{height:'35vh'}" (onHide)="closeDialog()" styleClass="border-round-top">
+  <div *ngIf="message" class="text-center">
+    <img [src]="message.image" alt="Failed" class="w-2 h-2">
+    <p class="font-bold text-4xl">{{message.title}}</p>
+    <p class="text-xl text-700 mt-1">{{message.description}}</p>
+  </div>
+  <ng-template pTemplate="footer">
+    <div *ngIf="isRegistrationSuccess" class="flex justify-content-center p-2">
+      <button pButton type="button" styleClass="p-button-sm" class="w-full" label="Proceed to login"
+        (click)="routeToLogin()"></button>
+    </div>
+    <div *ngIf="!isRegistrationSuccess" class="flex justify-content-center p-2">
+      <button pButton type="button" styleClass="p-button-sm" label="Okay" class="w-full"
+        (click)="closeDialog()"></button>
+    </div>
+  </ng-template>
+</p-sidebar>

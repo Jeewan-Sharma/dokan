@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IRegisterCredentials, IRememberMeData } from '@core/models';
+import { IRegisterCredentials, IRememberMeData, IShipping } from '@core/models';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,15 @@ export class LocalHostDataService {
     localStorage.setItem('DokanCredentials', newDataJSON);
   }
 
-  setLoginStatusAndCredentials(rememberMeStatus: boolean, firstName: string | null, lastName: string | null, email: string | null, phone: number | null, password: string | null, loginStatus: boolean) {
+  setLoginStatusAndCredentials(
+    rememberMeStatus: boolean,
+    firstName: string | null,
+    lastName: string | null,
+    email: string | null,
+    phone: number | null,
+    password: string | null,
+    loginStatus: boolean
+  ) {
     const rememberMeData: IRememberMeData = {
       firstName: firstName,
       lastName: lastName,
@@ -68,4 +76,57 @@ export class LocalHostDataService {
       }
     })
   }
+
+  getShippingInfo() {
+    return new Promise<IShipping[]>((resolve, reject) => {
+      try {
+        const storedJSON = localStorage.getItem('DokanShippingInfo');
+        const storedShippingInfo: IShipping[] = storedJSON ? JSON.parse(storedJSON) : [];
+        resolve(storedShippingInfo)
+      } catch (e) {
+        reject(e)
+      }
+    })
+  }
+
+  addShippingInfo(shippingInfo: IShipping): Promise<boolean> {
+    return new Promise<boolean>(async (resolve, reject) => {
+      try {
+        let storedShippingInfo: IShipping[] = await this.getShippingInfo()
+        storedShippingInfo.push(shippingInfo);
+        const newDataJSON = JSON.stringify(storedShippingInfo);
+        localStorage.setItem('DokanShippingInfo', newDataJSON);
+        resolve(true)
+      }
+      catch (e) {
+        throw (e)
+      }
+    })
+  }
+
+  deleteShippingInfo(selectedInfo: IShipping): Promise<boolean> {
+    return new Promise<boolean>(async (resolve, reject) => {
+      try {
+        let storedShippingInfo: IShipping[] = await this.getShippingInfo();
+        let index = storedShippingInfo.findIndex(info =>
+          info.address === selectedInfo.address &&
+          info.firstName === selectedInfo.firstName &&
+          info.lastName === selectedInfo.lastName &&
+          info.locationType === selectedInfo.locationType &&
+          info.phone === selectedInfo.phone &&
+          info.postalCode === selectedInfo.postalCode
+        );
+        if (index !== -1) {
+          storedShippingInfo.splice(index, 1);
+        }
+        console.log(storedShippingInfo)
+        const newDataJSON = JSON.stringify(storedShippingInfo);
+        localStorage.setItem('DokanShippingInfo', newDataJSON);
+        resolve(true)
+      } catch (e) {
+        reject(false)
+      }
+    })
+  }
+
 }

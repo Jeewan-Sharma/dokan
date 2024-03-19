@@ -51,9 +51,10 @@
 </div>
 
 <!-- response dialog -->
-<p-dialog *ngIf="showErrorResponse" class="loginResponse" [(visible)]="showErrorResponse" [modal]="true"
-  [style]="{width: '30vw'}" [draggable]="false" [breakpoints]="{'767px': '100vw'}">
-  <div class="text-center">
+<p-dialog *ngIf="(screenSize$ | async) ==='lg' || (screenSize$ | async) === 'xl'" class="loginResponse"
+  [(visible)]="showErrorResponse" [modal]="true" [style]="{width: '30vw'}" [draggable]="false"
+  [breakpoints]="{'767px': '100vw'}">
+  <div *ngIf="message" class="text-center">
     <img [src]="message.image" alt="Failed" class="w-2 h-2">
     <p class="font-bold text-4xl">{{message.title}}</p>
     <p class="text-xl text-700 mt-1">{{message.description}}</p>
@@ -65,3 +66,18 @@
     </div>
   </ng-template>
 </p-dialog>
+
+<p-sidebar *ngIf="(screenSize$ | async) ==='sm' || (screenSize$ | async) === 'md'" [(visible)]="showErrorResponse"
+  position="bottom" [style]="{height:'35vh'}" (onHide)="closeDialog()" styleClass="border-round-top">
+  <div *ngIf="message" class="text-center">
+    <img [src]="message.image" alt="Failed" class="w-2 h-2">
+    <p class="font-bold text-4xl">{{message.title}}</p>
+    <p class="text-xl text-700 mt-1">{{message.description}}</p>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="flex justify-content-center p-2">
+      <button pButton type="button" styleClass="p-button-sm" label="Okay" class="w-full m-0"
+        (click)="closeDialog()"></button>
+    </div>
+  </ng-template>
+</p-sidebar>
