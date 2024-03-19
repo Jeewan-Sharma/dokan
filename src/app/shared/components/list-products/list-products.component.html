@@ -25,7 +25,7 @@
   [(visible)]="detailsVisibility" [style]="{width: '80vw'}">
 
   <ng-template pTemplate="header">
-    <div class="px-3 mt-3">
+    <div class="mt-3">
       <p class="font-semibold text-2xl">{{selectedProduct.title}}</p>
     </div>
   </ng-template>
@@ -35,21 +35,19 @@
   </ng-template>
 
   <ng-template pTemplate="footer">
-    <div class="px-3 mb-3">
-      <div class="flex justify-content-between">
-        <p class="text-4xl text-800 font-semibold mt-2">{{selectedProduct.price | currency:'USD'}}</p>
-        <div class="input-custom">
-          <p-inputNumber class="mt-2" [(ngModel)]="cartQuantity" [showButtons]="true" buttonLayout="horizontal"
-            inputId="horizontal" spinnerMode="horizontal" [step]="1" [min]="1" decrementButtonClass="p-button-danger"
-            incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
-          </p-inputNumber>
-        </div>
+    <div class="flex justify-content-between">
+      <p class="text-4xl text-800 font-semibold mt-2">{{selectedProduct.price | currency:'USD'}}</p>
+      <div class="input-custom">
+        <p-inputNumber class="mt-2" [(ngModel)]="cartQuantity" [showButtons]="true" buttonLayout="horizontal"
+          inputId="horizontal" spinnerMode="horizontal" [step]="1" [min]="1" decrementButtonClass="p-button-danger"
+          incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
+        </p-inputNumber>
       </div>
-      <div class="flex gap-2 mt-3">
-        <button (click)="addToCart()" pButton pRipple label="Add to Cart" class="w-full"></button>
-        <button pButton pRipple icon="pi pi-heart" class="w-3rem p-button-outlined border-2">
-        </button>
-      </div>
+    </div>
+    <div class="flex gap-2 mt-3">
+      <button (click)="addToCart()" pButton pRipple label="Add to Cart" class="w-full"></button>
+      <button pButton pRipple icon="pi pi-heart" class="w-3rem p-button-outlined border-2">
+      </button>
     </div>
   </ng-template>
 
@@ -67,21 +65,19 @@
   </ng-template>
 
   <ng-template pTemplate="footer">
-    <div class="px-2 pb-2">
-      <div class="flex justify-content-between mt-4">
-        <p class="text-4xl text-800 font-semibold mt-2">{{selectedProduct.price | currency:'USD'}}</p>
-        <div class="input-custom">
-          <p-inputNumber class="mt-2" [(ngModel)]="cartQuantity" [showButtons]="true" buttonLayout="horizontal"
-            inputId="horizontal" spinnerMode="horizontal" [step]="1" [min]="1" decrementButtonClass="p-button-danger"
-            incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
-          </p-inputNumber>
-        </div>
+    <div class="flex justify-content-between">
+      <p class="text-4xl text-800 font-semibold mt-2">{{selectedProduct.price | currency:'USD'}}</p>
+      <div class="input-custom">
+        <p-inputNumber class="mt-2" [(ngModel)]="cartQuantity" [showButtons]="true" buttonLayout="horizontal"
+          inputId="horizontal" spinnerMode="horizontal" [step]="1" [min]="1" decrementButtonClass="p-button-danger"
+          incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
+        </p-inputNumber>
       </div>
-      <div class="flex gap-1 mt-3">
-        <button pButton pRipple icon="pi pi-heart" class="w-3rem p-button-outlined border-2">
-        </button>
-        <button (click)="addToCart()" pButton pRipple label="Add to Cart" class="w-full"></button>
-      </div>
+    </div>
+    <div class="flex gap-1 mt-3">
+      <button pButton pRipple icon="pi pi-heart" class="w-3rem p-button-outlined border-2">
+      </button>
+      <button (click)="addToCart()" pButton pRipple label="Add to Cart" class="w-full"></button>
     </div>
   </ng-template>
 </p-sidebar>

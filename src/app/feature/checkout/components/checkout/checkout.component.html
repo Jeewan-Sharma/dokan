@@ -1,7 +1,7 @@
 <div class="px-3 lg:px-8 py-3 block lg:flex lg:flex-row-reverse">
 
   <!-- SUMMERY -->
-  <div class="w-12 lg:w-4 lg:pl-1">
+  <div class="w-12 lg:w-4 p-1">
     <div class="border-1 border-300 border-round bg-gray-100 p-3">
       <p class="text-xl font-bold">Your Order</p>
 
@@ -68,16 +68,24 @@
   </div>
 
   <!-- INFORMATION -->
-  <div class="w-12 lg:w-8 lg:pr-1 mt-3 lg:mt-0">
+  <div class="w-12 lg:w-8 lg:pr-1 mt-3 lg:mt-0 p-1">
     <div class="border-1 border-300 border-round bg-gray-100 p-3">
       <p class="text-xl font-bold">Shipping Information</p>
-      <div class="flex gap-3 mt-3">
-        <div class="border-2 border-700 border-dashed border-round p-2 ">
-          <p class="text-sm">Jeewan Sharma</p>
-          <p class="text-sm">(+61) 452 645 605</p>
-          <p class="text-sm">1208/5 Second Avenue, Blacktown, NSW</p>
+      <div class="flex gap-3 mt-3 overflow-x-scroll">
+        <div (click)="selectShippingInfo(info)" *ngFor="let info of shippingInformation">
+          <div class="border-2 border-round cursor-pointer hover:border-primary-600 hover:bg-blue-100 p-1 w-14rem"
+            [ngClass]="selectedShippingInfo == info ? 'border-primary-600 border-solid' : 'border-700 border-dashed'">
+            <div class="flex justify-content-between">
+              <p class="text-700 font-bold">{{info.locationType}}</p>
+              <i (click)="editShippingInformation(info)" class="pi pi-file-edit"></i>
+            </div>
+            <p class="text-sm text-600 font-bold">{{info.firstName}} {{info.lastName}}</p>
+            <p class="text-sm text-600 ">{{info.phone}}, Postal Code: {{info.postalCode}}</p>
+            <p class="text-sm text-600 white-space-nowrap overflow-hidden text-overflow-ellipsis">{{info.address}}</p>
+          </div>
         </div>
-        <div class="border-2 border-700 border-dashed border-round px-3 flex justify-content-center align-items-center">
+        <div (click)="openShippingInfoForm()"
+          class="border-2 cursor-pointer hover-color hover:border-primary-600 hover:bg-blue-100 border-700 border-dashed border-round px-3 flex justify-content-center align-items-center">
           <i class="pi pi-plus text-3xl"></i>
         </div>
       </div>
@@ -120,7 +128,7 @@
             </div>
           </div>
         </div>
-        <button (click)="checkout()" pButton pRipple label="Checkout"
+        <button (click)="checkout()" pButton pRipple label="Proceed"
           class="mt-3 w-full bg-primary-600 border-primary-600"></button>
       </form>
     </div>
@@ -128,14 +136,15 @@
 </div>
 
 <p-dialog (onHide)="navigateToHome()" *ngIf="(screenSize$ | async) === 'lg' || (screenSize$ | async) === 'xl'"
-  class="header-less-dialog" [modal]='true' [(visible)]="responseVisibility" [style]="{width: '30vw'}"
+  header="Order Successful" [modal]='true' [(visible)]="responseVisibility" [style]="{width: '30vw'}"
   [breakpoints]="{ '768px': '100vw'}">
-  <div class="p-3">
-    <p class="text-3xl text-center text-800 font-bold">Order Successful</p>
-    <img [src]=ASSETS.IMAGES.SUCCESS alt="">
+  <div class="flex justify-content-center align-items-center w-full">
+    <img [src]=ASSETS.IMAGES.SUCCESS alt="SUCCESS" width="200rem">
+  </div>
+  <ng-template pTemplate="footer">
     <button (click)="navigateToHome()" pButton pRipple label="Okay"
       class="w-full bg-primary-600 border-primary-600"></button>
-  </div>
+  </ng-template>
 </p-dialog>
 
 <p-sidebar (onHide)="navigateToHome()" *ngIf="(screenSize$ | async) === 'sm' || (screenSize$ | async) === 'md'"
@@ -152,3 +161,80 @@
     </div>
   </ng-template>
 </p-sidebar>
+
+<!-- shipping info form -->
+<p-dialog (onHide)="onFormClose()" *ngIf="(screenSize$ | async) === 'lg' || (screenSize$ | async) === 'xl'"
+  header="Shipping Information" [modal]='true' [(visible)]="shippingInfoFormVisibility" [style]="{width: '50vw'}"
+  [breakpoints]="{ '768px': '100vw'}">
+  <form [formGroup]="shippingInformationForm">
+    <div class="grid mt-1">
+      <div class="col-12">
+        <p-dropdown [options]="locationType" [showClear]="true" formControlName="locationType"
+          placeholder="Location Type" optionLabel="name" styleClass="w-full p-2"></p-dropdown>
+        <div
+          *ngIf="shippingInformationForm.get('locationType')?.invalid && shippingInformationForm.get('locationType')?.touched">
+          <p class="text-red-500">Location Type is required.</p>
+        </div>
+      </div>
+
+      <div class="col-12 lg:col-6">
+        <p class="text-700 text-lg mb-1">First Name<span class="text-red-600">*</span></p>
+        <input pInputText formControlName="firstName" placeholder="First Name" class="w-full" />
+        <div
+          *ngIf="shippingInformationForm.get('firstName')?.invalid && shippingInformationForm.get('firstName')?.touched">
+          <p class="text-red-500">First Name is required.</p>
+        </div>
+      </div>
+
+      <div class="col-12 lg:col-6">
+        <p class="text-700 text-lg mb-1">Last Name<span class="text-red-600">*</span></p>
+        <input pInputText formControlName="lastName" placeholder="Last Name" class="w-full" />
+        <div
+          *ngIf="shippingInformationForm.get('lastName')?.invalid && shippingInformationForm.get('lastName')?.touched">
+          <p class="text-red-500">Last Name is required.</p>
+        </div>
+      </div>
+
+      <div class="col-12 lg:col-6">
+        <p class="text-700 text-lg mb-1">Phone<span class="text-red-600">*</span></p>
+        <p-inputMask mask="9999 999 999" formControlName="phone" placeholder="XXXX XXX XXX"
+          styleClass="w-full"></p-inputMask>
+        <div *ngIf="shippingInformationForm.get('phone')?.invalid && shippingInformationForm.get('phone')?.touched">
+          <p class="text-red-500">Phone Number is required.</p>
+        </div>
+      </div>
+
+      <div class="col-12 lg:col-6">
+        <p class="text-700 text-lg mb-1">Postal Code<span class="text-red-600">*</span></p>
+        <input pInputText formControlName="postalCode" type="number" placeholder="Postal Code" class="w-full" />
+        <div
+          *ngIf="shippingInformationForm.get('postalCode')?.invalid && shippingInformationForm.get('postalCode')?.touched">
+          <p class="text-red-500">Postal Code.</p>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <p class="text-700 text-lg mb-1">Address<span class="text-red-600">*</span></p>
+        <input pInputText formControlName="address" placeholder="Address" class="w-full" />
+        <div *ngIf="shippingInformationForm.get('address')?.invalid && shippingInformationForm.get('address')?.touched">
+          <p class="text-red-500">Address.</p>
+        </div>
+      </div>
+
+    </div>
+  </form>
+
+  <ng-template pTemplate="footer">
+    <button *ngIf="!editShippingInformationMode" (click)="addShippingInfo()" pButton pRipple label="Add"
+      class="w-full bg-primary-600 border-primary-600 "></button>
+    <div class="flex justify-content-between gap-2">
+      <button *ngIf="editShippingInformationMode" (click)="deleteShippingInfo()" pButton pRipple label="Delete"
+        class="w-full bg-red-600 border-red-600">
+      </button>
+      <button *ngIf="editShippingInformationMode" pButton pRipple label="Save"
+        class="w-full bg-primary-600 border-primary-600">
+      </button>
+
+    </div>
+  </ng-template>
+</p-dialog>

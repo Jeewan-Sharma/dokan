@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ASSETS } from '@core/consts';
 import { ILoginCredentials, IMessage, IRegisterCredentials } from '@core/models';
 import { AuthService, DeviceWidthService, LoaderService, LocalHostDataService } from '@core/services';
@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
     private _loaderService: LoaderService,
     private _authService: AuthService,
     private _localHostDataService: LocalHostDataService,
+    private _activatedRoute: ActivatedRoute,
   ) { }
 
   async ngOnInit() {
@@ -85,7 +86,9 @@ export class LoginComponent implements OnInit {
         } else {
           this._localHostDataService.setLoginStatusAndCredentials(rememberMe, null, null, null, null, null, true)
         }
-        this.navigateToHome()
+        //
+        const returnUrl = this._activatedRoute.snapshot.queryParams['returnUrl'] || '/';
+        this._router.navigate([returnUrl])
       }
     } catch (e) {
       this.message = this.loginFailedMessage

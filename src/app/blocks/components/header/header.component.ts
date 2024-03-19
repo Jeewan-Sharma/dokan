@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
   readonly ASSETS = ASSETS;
 
   menuVisibility: boolean = false;
+  searchBoxVisibility: boolean = false;
   loginCredential!: IRememberMeData;
   constructor(
     public _router: Router,
@@ -27,6 +28,10 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLoginStatus()
+  }
+
+  get screenSize$() {
+    return this._deviceWidthService.screenSize$;
   }
 
   async getLoginStatus() {
@@ -62,4 +67,13 @@ export class HeaderComponent implements OnInit {
   routeToLogin() {
     this._router.navigate(['/auth/login'])
   }
+
+  openSearchBox() {
+    this.searchBoxVisibility = true;
+  }
+
+  closeShippingInfoForm() {
+    this.searchBoxVisibility = false;
+  }
+
 }

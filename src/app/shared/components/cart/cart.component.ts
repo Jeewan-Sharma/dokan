@@ -58,7 +58,7 @@ export class CartComponent {
       });
       this.confirmVisibility = false;
     } else {
-      this._toastService.showSuccess({
+      this._toastService.showError({
         message: "Error in removing form cart",
       });
     }

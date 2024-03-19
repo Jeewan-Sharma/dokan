@@ -18,6 +18,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { BadgeModule } from 'primeng/badge';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { SearchBoxComponent } from './components/search-box/search-box.component';
 
 const primengModules = [
   ToastModule,
@@ -37,7 +38,8 @@ const primengModules = [
     FooterComponent,
     HeaderComponent,
     AnnouncementComponent,
-    ToastComponent
+    ToastComponent,
+    SearchBoxComponent
   ],
   imports: [
     CommonModule,

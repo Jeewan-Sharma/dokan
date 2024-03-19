@@ -146,14 +146,14 @@
     </div>
   </ng-template>
   <ng-template pTemplate="content">
-    <div class="text-xl text-700 font-semibold text-center p-2">Are you sure to remove {{selectedProduct &&
+    <div class="text-xl text-700 font-semibold text-center">Are you sure to remove {{selectedProduct &&
       selectedProduct.title}} from
       the
       cart?
     </div>
   </ng-template>
   <ng-template pTemplate="footer">
-    <div class="grid m-0 pb-2 px-2">
+    <div class="grid m-0">
       <div class="col-6 py-0">
         <p-button (click)="cancelDelete()" class="button-label-xl " label="Cancel" [outlined]="true" severity="danger"
           styleClass="w-full  "></p-button>

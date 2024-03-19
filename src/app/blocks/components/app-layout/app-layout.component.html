@@ -6,30 +6,26 @@
 <app-toast></app-toast>
 
 <!-- cart -->
-<p-dialog *ngIf="(screenSize$ | async) === 'lg' || (screenSize$ | async) === 'xl'" class="header-less-dialog"
-  [modal]='true' [(visible)]="cartVisibility" [style]="{width: '95vw', height:'100vh'}">
+<p-dialog *ngIf="(screenSize$ | async) === 'lg' || (screenSize$ | async) === 'xl'" [modal]='true'
+  [(visible)]="cartVisibility" [style]="{width: '95vw', height:'100vh'}">
   <ng-template pTemplate="header">
-    <div class="px-2 pb-2">
-      <div class="flex gap-2 align-items-center">
-        <p class="text-3xl font-bold">Cart</p>
-        <i class="pi pi-shopping-cart text-3xl"></i>
-      </div>
+    <div class="flex gap-2 align-items-center">
+      <p class="text-3xl font-bold">Cart</p>
+      <i class="pi pi-shopping-cart text-3xl"></i>
     </div>
   </ng-template>
-  <div class="p-3">
-    <app-cart *ngIf="cartVisibility"></app-cart>
-  </div>
+  <app-cart *ngIf="cartVisibility"></app-cart>
   <ng-template pTemplate="footer">
     <div class="grid">
-      <div class="col-12 lg:col-8 mt-4">
-        <div class="flex justify-content-between ">
-          <p class="text-xl text-800 font-bold pl-6">Total Items</p>
-          <p class="text-2xl text-800 font-bold pr-6">{{(_cartService.totalItems$| async)}}</p>
+      <div class="col-12 lg:col-8">
+        <div class="flex justify-content-between border-1 border-round border-400 p-1 px-2">
+          <p class="text-xl text-800 font-bold">Total Items</p>
+          <p class="text-2xl text-800 font-bold">{{(_cartService.totalItems$| async)}}</p>
         </div>
       </div>
-      <div class="col-12 lg:col-4 pr-4">
+      <div class="col-12 lg:col-4">
         <button [disabled]="(_cartService.cartProducts$ | async)?.length === 0" (click)="proceedToCheckout()" pButton
-          pRipple label="Proceed to Checkout" class="w-full mt-3"></button>
+          pRipple label="Proceed to Checkout" class="w-full"></button>
       </div>
     </div>
   </ng-template>
@@ -46,14 +42,10 @@
     </div>
   </ng-template>
   <ng-template pTemplate="content">
-    <div class="px-3">
-      <app-cart *ngIf="cartVisibility"></app-cart>
-    </div>
+    <app-cart *ngIf="cartVisibility"></app-cart>
   </ng-template>
   <ng-template pTemplate="footer">
-    <div class="px-2 pb-2">
-      <button [disabled]="(_cartService.cartProducts$ | async)?.length === 0" (click)="proceedToCheckout()" pButton
-        pRipple label="Proceed to Checkout" class="w-full mt-3"></button>
-    </div>
+    <button [disabled]="(_cartService.cartProducts$ | async)?.length === 0" (click)="proceedToCheckout()" pButton
+      pRipple label="Proceed to Checkout" class="w-full mt-3"></button>
   </ng-template>
 </p-sidebar>

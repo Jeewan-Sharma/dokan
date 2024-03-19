@@ -1,0 +1,9 @@
+.header-less-dialog {
+  .p-dialog-draggable .p-dialog-header {
+    display: none;
+  }
+  .p-dialog .p-dialog-content:last-of-type {
+    padding: 8px;
+    border-radius: 6px;
+  }
+}

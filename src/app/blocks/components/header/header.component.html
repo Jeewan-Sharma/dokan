@@ -18,7 +18,7 @@
   </div>
   <!-- Right: Icon Bar -->
   <div class="flex gap-4 align-items-center ml-3 md:ml-0">
-    <p-inputGroup>
+    <p-inputGroup (click)="openSearchBox()">
       <input type="text" pInputText placeholder="Search" />
       <button type="button" pButton icon="pi pi-search" class="bg-gray-700 border-gray-700"></button>
     </p-inputGroup>
@@ -75,7 +75,7 @@
 
 <p-overlayPanel #op>
   <ng-template pTemplate="content">
-    <div *ngIf="loginCredential.loginStatus" class="p-2">
+    <div *ngIf="loginCredential.loginStatus">
       <div class="flex align-items-center gap-2 p-2 bg-gray-200 border-round">
         <p class="py-1 px-2 text-white border-circle font-bold bg-primary-600 text-3xl">
           {{loginCredential.firstName?.charAt(0)}}{{loginCredential.lastName?.charAt(0)}}</p>
@@ -97,10 +97,22 @@
         <p class="text-lg">Logout</p>
       </div>
     </div>
-    <div *ngIf="!loginCredential.loginStatus" class="p-2">
+    <div *ngIf="!loginCredential.loginStatus">
       <div class="py-2 px-4 mt-1 cursor-pointer bg-primary-600 border-round">
         <p (click)="routeToLogin()" class="text-lg text-white">Login or Register</p>
       </div>
     </div>
   </ng-template>
 </p-overlayPanel>
+
+<p-dialog *ngIf="(screenSize$ | async) === 'lg' || (screenSize$ | async) === 'xl'" class="header-less-dialog"
+  [modal]='true' [position]="'top'" [(visible)]="searchBoxVisibility" [style]="{width: '50vw'}"
+  [breakpoints]="{ '768px': '100vw'}">
+  <div class="py-1 px-2">
+    <div class="flex justify-content-between mb-1">
+      <p class="text-xl text-800 font-bold">Shipping Information</p>
+      <i (click)="closeShippingInfoForm()" class="pi pi-times font-bold cursor-pointer mt-2 text-xl"></i>
+    </div>
+    <app-search-box></app-search-box>
+  </div>
+</p-dialog>
