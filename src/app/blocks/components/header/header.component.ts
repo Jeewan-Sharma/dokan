@@ -72,6 +72,10 @@ export class HeaderComponent implements OnInit {
     this.searchBoxVisibility = true;
   }
 
+  closeSearchBox(event: boolean) {
+    this.searchBoxVisibility = event;
+  }
+
   closeShippingInfoForm() {
     this.searchBoxVisibility = false;
   }

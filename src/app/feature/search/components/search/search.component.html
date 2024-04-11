@@ -1,0 +1,38 @@
+<div class="grid my-2">
+  <div class="col-3 p-3">
+    <p class="font-bold text-xl text-700">Filter</p>
+  </div>
+  <div class="col-9 px-3">
+    <div class="flex justify-content-center">
+      <p-inputGroup class="w-full md:w-9">
+        <input type="text" pInputText placeholder="Search" [formControl]="searchInput" />
+        <button type="button" pButton icon="pi pi-search" class="bg-primary-600 border-primary-600"></button>
+      </p-inputGroup>
+    </div>
+    <div class="block md:flex align-items-center gap-3 mt-2 boldDropDown">
+      <p class="text-600">Search results for <b class="text-xl text-900">"{{searchInput.value}}"</b></p>
+      <div class="flex gap-2 border-1 border-400 border-round p-2 mt-2 md:mt-0">
+        <p>Sort by:</p>
+        <p-dropdown [options]="sortType" [showClear]="true" [(ngModel)]="selectedSortType" optionLabel="name"
+          placeholder="choose sort type" styleClass="border-0"></p-dropdown>
+      </div>
+    </div>
+
+    <ng-container *ngIf="pageState$ | async as currentState">
+      <ng-container [ngSwitch]="currentState">
+        <ng-container *ngSwitchCase="ePageState.LOADING">
+          <app-loading-list></app-loading-list>
+        </ng-container>
+        <ng-container *ngSwitchCase="ePageState.SUCCESS">
+          <app-list-products [products]="searchedData"></app-list-products>
+        </ng-container>
+        <ng-container *ngSwitchCase="ePageState.ERROR">
+          <app-error-on-load></app-error-on-load>
+        </ng-container>
+        <ng-container *ngSwitchCase="ePageState.EMPTY">
+          <app-empty-list></app-empty-list>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

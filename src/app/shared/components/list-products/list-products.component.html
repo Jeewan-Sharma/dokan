@@ -1,19 +1,19 @@
 <div class="grid mt-2">
-  <div *ngFor="let products of products" class="col-12 md:col-6 lg:col-3 m-0 p-2">
-    <div (click)="viewDetails(products)"
+  <div *ngFor="let product of products" class="col-12 md:col-6 lg:col-3 m-0 p-2">
+    <div (click)="viewDetails(product)"
       class="image-box border-1 cursor-pointer border-round bg-gray-50 flex flex-row lg:flex-column justify-content-center align-items-center pb-0 lg:pb-2">
       <div class="p-2 h-7rem md:h-10rem lg:h-14rem w-4 lg:w-full overflow-hidden flex justify-content-center"
         [ngClass]="{'border-round-left': (screenSize$ | async) === 'sm' || (screenSize$ | async) === 'md', 'border-round-top': (screenSize$ | async) === 'lg'  || (screenSize$ | async) === 'xl'}">
-        <img src={{products.image}} alt="Shop Image" class="h-full w-full object-fit transition">
+        <img src={{product.image}} alt="Shop Image" class="h-full w-full object-fit transition">
       </div>
       <div class="w-8 lg:w-11 px-2 lg:px-0 mt-1">
         <div class="text-xl font-semibold text-800 white-space-nowrap overflow-hidden text-overflow-ellipsis">
-          {{products.title}}</div>
+          {{product.title}}</div>
         <div class="mt-1 text-700 white-space-nowrap overflow-hidden text-overflow-ellipsis">
-          {{products.description}}
+          {{product.description}}
         </div>
         <div class="text-right w-full mt-1">
-          <p class="text-xl font-semibold ">{{products.price | currency:'USD'}}</p>
+          <p class="text-xl font-semibold ">{{product.price | currency:'USD'}}</p>
         </div>
       </div>
     </div>
@@ -30,9 +30,9 @@
     </div>
   </ng-template>
 
-  <ng-template pTemplate="content">
-    <app-details-view *ngIf="detailsVisibility" [product]='selectedProduct'></app-details-view>
-  </ng-template>
+  <ng-container *ngIf="detailsVisibility">
+    <app-details-view [product]='selectedProduct'></app-details-view>
+  </ng-container>
 
   <ng-template pTemplate="footer">
     <div class="flex justify-content-between">
@@ -60,9 +60,9 @@
     <p class="text-3xl font-bold px-2 pb-1">{{selectedProduct.title}}</p>
   </ng-template>
 
-  <ng-template pTemplate="content">
-    <app-details-view *ngIf="detailsVisibility" [product]='selectedProduct'></app-details-view>
-  </ng-template>
+  <ng-container *ngIf="detailsVisibility">
+    <app-details-view [product]='selectedProduct'></app-details-view>
+  </ng-container>
 
   <ng-template pTemplate="footer">
     <div class="flex justify-content-between">

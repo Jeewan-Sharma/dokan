@@ -19,7 +19,7 @@
   <!-- Right: Icon Bar -->
   <div class="flex gap-4 align-items-center ml-3 md:ml-0">
     <p-inputGroup (click)="openSearchBox()">
-      <input type="text" pInputText placeholder="Search" />
+      <input [readOnly]="true" type="text" pInputText placeholder="Search" />
       <button type="button" pButton icon="pi pi-search" class="bg-gray-700 border-gray-700"></button>
     </p-inputGroup>
     <i (click)="favoritesClicked()" pBadge value="2"
@@ -40,7 +40,7 @@
         <img [src]="ASSETS.IMAGES.LOGO" alt="DOKAN" width="30rem">
         <p class="text-3xl font-bold text-primary-600">Dokan</p>
       </div>
-      <i (click)="closeSidebar()" class="pi pi-times-circle text-4xl"></i>
+      <i (click)="closeSidebar()" class="pi pi-times text-2xl mt-2"></i>
     </div>
     <div class="flex flex-column mt-5">
       <a routerLink="/">
@@ -105,14 +105,11 @@
   </ng-template>
 </p-overlayPanel>
 
-<p-dialog *ngIf="(screenSize$ | async) === 'lg' || (screenSize$ | async) === 'xl'" class="header-less-dialog"
-  [modal]='true' [position]="'top'" [(visible)]="searchBoxVisibility" [style]="{width: '50vw'}"
-  [breakpoints]="{ '768px': '100vw'}">
-  <div class="py-1 px-2">
-    <div class="flex justify-content-between mb-1">
-      <p class="text-xl text-800 font-bold">Shipping Information</p>
-      <i (click)="closeShippingInfoForm()" class="pi pi-times font-bold cursor-pointer mt-2 text-xl"></i>
-    </div>
-    <app-search-box></app-search-box>
+<p-dialog *ngIf="searchBoxVisibility" class="header-less-dialog" [modal]='true' [position]="'top'"
+  [(visible)]="searchBoxVisibility" [style]="{width: '50vw'}" [breakpoints]="{ '768px': '100vw'}">
+  <div class="flex justify-content-between align-content-center mb-2">
+    <p class="text-800 font-semibold">Search Here</p>
+    <i (click)="closeShippingInfoForm()" class="pi pi-times font-bold cursor-pointer mt-2 text-xl"></i>
   </div>
+  <app-search-box (closeDialogEvent)="closeSearchBox($event)"></app-search-box>
 </p-dialog>

@@ -7,3 +7,4 @@ export * from './toast.service';
 export * from './cart.service';
 export * from './local-host-data.service';
 export * from './auth.service';
+export * from './products.service'

@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IProducts } from '@core/models';
-import { DeviceWidthService, ToastService } from '@core/services';
-
+import { DeviceWidthService } from '@core/services';
 import { RatingModule } from 'primeng/rating';
 
 @Component({

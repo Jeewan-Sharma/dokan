@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ASSETS } from '@core/consts';
 import { EPageState } from '@core/enums';
-import { DeviceWidthService, LoaderService, ToastService } from '@core/services';
+import { IProducts } from '@core/models';
+import { DeviceWidthService, LoaderService, ToastService, ProductsService } from '@core/services';
 import { BehaviorSubject } from 'rxjs';
-import { ProductsService } from 'src/app/core/services/products.service';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
     this.ePageState.DEFAULT
   );
 
-  apiData: any[] = [];
+  apiData: IProducts[] = [];
   searchedInputResult: string = '';
 
   constructor(
@@ -45,10 +45,10 @@ export class HomeComponent implements OnInit {
         this.pageState$.next(this.ePageState.SUCCESS);
       }
     } catch (err) {
+      this.pageState$.next(this.ePageState.ERROR);
       this._toastService.showError({
         message: "Error in loading Products",
       });
-      this.pageState$.next(this.ePageState.ERROR);
     }
     finally {
       this._loaderService.hideLoader();
