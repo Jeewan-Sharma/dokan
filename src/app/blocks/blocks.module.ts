@@ -6,7 +6,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { AnnouncementComponent } from './components/announcement/announcement.component';
 import { ToastComponent } from './components/toast/toast.component';
-import { CartComponent } from '../shared/components/cart/cart.component';
+import { CartComponent } from '../feature/cart/cart.component';
 import { LoaderComponent } from '../shared/components/loader/loader.component';
 
 import { ToastModule } from 'primeng/toast';
@@ -19,6 +19,7 @@ import { ButtonModule } from 'primeng/button';
 import { BadgeModule } from 'primeng/badge';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const primengModules = [
   ToastModule,
@@ -39,7 +40,7 @@ const primengModules = [
     HeaderComponent,
     AnnouncementComponent,
     ToastComponent,
-    SearchBoxComponent
+    SearchBoxComponent,
   ],
   imports: [
     CommonModule,
@@ -47,6 +48,7 @@ const primengModules = [
     CartComponent,
     primengModules,
     LoaderComponent,
+    ReactiveFormsModule
   ]
 })
 export class BlocksModule { }

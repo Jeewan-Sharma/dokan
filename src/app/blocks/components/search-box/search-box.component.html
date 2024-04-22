@@ -1,1 +1,19 @@
-<p>search-box works!</p>
+<p-inputGroup styleClass="w-full">
+  <input (keyup.enter)="onSearch()" type="text" pAutoFocus [autofocus]="true" pInputText placeholder="Search"
+    [formControl]="searchInput" />
+  <button (click)="onSearch()" type="button" pButton icon="pi pi-search"
+    class="bg-primary-600 border-primary-600"></button>
+</p-inputGroup>
+
+<div class="mt-2">
+  <p class="text-800 text-sm font-semibold">Recent Searches</p>
+</div>
+
+<div class="mt-2">
+  <div (click)="onRecentClick(i)" *ngFor="let i of _localHostDataService.recentSearches$ | async" class="
+    border-1 border-round-lg border-300 p-2 px-3 cursor-pointer mt-2
+    flex align-items-center justify-content-between hover:bg-blue-100 hover:border-primary-600">
+    <p class="text-xl text-700">{{i}}</p>
+    <i (click)="removeFromRecentSearches(i)" class="pi pi-times"></i>
+  </div>
+</div>

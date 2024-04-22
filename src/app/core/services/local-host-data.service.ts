@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { IRegisterCredentials, IRememberMeData, IShipping } from '@core/models';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocalHostDataService {
+
+  public recentSearches$ = new BehaviorSubject<string[]>([]);
 
   constructor() { }
 
@@ -128,5 +131,65 @@ export class LocalHostDataService {
       }
     })
   }
+
+
+  setRecentSearches(searchText: string) {
+    return new Promise<boolean>(async (resolve, reject) => {
+      try {
+        // get json value from local storage
+        const storedJSON = localStorage.getItem('DokanRecentSearches');
+        // convert back to array
+        let storedRecentSearches = storedJSON ? JSON.parse(storedJSON) : [];
+
+        // Remove searchText from storedRecentSearches if it exists
+        storedRecentSearches = storedRecentSearches.filter((search: string) => search !== searchText);
+
+        // Add the new search to the beginning of the array
+        storedRecentSearches.unshift(searchText);
+        // Keep only the first 5 searches
+        const recentSearches = storedRecentSearches.slice(0, 5);
+        this.recentSearches$.next(recentSearches)
+        localStorage.setItem('DokanRecentSearches', JSON.stringify(recentSearches));
+        resolve(true);
+      } catch (e) {
+        reject(e)
+      }
+    })
+  }
+
+  getRecentSearches() {
+    return new Promise<string[]>(async (resolve, reject) => {
+      try {
+        // get json value from local storage
+        const storedJSON = localStorage.getItem('DokanRecentSearches');
+        // convert back to array
+        const storedRecentSearches: string[] = storedJSON ? JSON.parse(storedJSON) : [];
+        this.recentSearches$.next(storedRecentSearches)
+        resolve(storedRecentSearches)
+      } catch (e) {
+        reject(e)
+      }
+    })
+  }
+
+  removeFromRecentSearches(searchText: string) {
+    return new Promise<boolean>(async (resolve, reject) => {
+      try {
+        // get json value from local storage
+        const storedJSON = localStorage.getItem('DokanRecentSearches');
+        // convert back to array
+        let storedRecentSearches = storedJSON ? JSON.parse(storedJSON) : [];
+
+        // Remove searchText from storedRecentSearches if it exists
+        storedRecentSearches = storedRecentSearches.filter((search: string) => search !== searchText);
+        this.recentSearches$.next(storedRecentSearches)
+        localStorage.setItem('DokanRecentSearches', JSON.stringify(storedRecentSearches));
+        resolve(true);
+      } catch (e) {
+        reject(e)
+      }
+    })
+  }
+
 
 }

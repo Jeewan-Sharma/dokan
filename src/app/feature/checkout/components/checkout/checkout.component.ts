@@ -201,4 +201,8 @@ export class CheckoutComponent implements OnInit {
     this.editShippingInformationMode = false;
   }
 
+  saveEdited() {
+    this.shippingInfoFormVisibility = false;
+  }
+
 }

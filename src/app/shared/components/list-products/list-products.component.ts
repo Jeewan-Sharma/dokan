@@ -10,10 +10,16 @@ import { IProducts } from '@core/models';
 import { ButtonModule } from 'primeng/button';
 import { InputNumberModule } from 'primeng/inputnumber';
 
+const PrimeNgModules = [DialogModule, SidebarModule, InputNumberModule, ButtonModule,]
+
 @Component({
   selector: 'app-list-products',
   standalone: true,
-  imports: [CommonModule, FormsModule, DialogModule, SidebarModule, InputNumberModule, ButtonModule, FormsModule, DetailsViewComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    PrimeNgModules,
+    DetailsViewComponent],
   templateUrl: './list-products.component.html',
   styleUrl: './list-products.component.scss'
 })
@@ -50,8 +56,8 @@ export class ListProductsComponent {
   }
 
   viewDetails(product: IProducts) {
-    this.detailsVisibility = true;
     this.selectedProduct = product;
+    this.detailsVisibility = true;
     this.cartQuantity = 1;
   }
 

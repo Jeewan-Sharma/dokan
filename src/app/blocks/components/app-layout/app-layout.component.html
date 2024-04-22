@@ -9,7 +9,7 @@
 <p-dialog *ngIf="(screenSize$ | async) === 'lg' || (screenSize$ | async) === 'xl'" [modal]='true'
   [(visible)]="cartVisibility" [style]="{width: '95vw', height:'100vh'}">
   <ng-template pTemplate="header">
-    <div class="flex gap-2 align-items-center">
+    <div class="flex gap-2 align-items-center pt-2">
       <p class="text-3xl font-bold">Cart</p>
       <i class="pi pi-shopping-cart text-3xl"></i>
     </div>

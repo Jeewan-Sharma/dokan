@@ -16,6 +16,10 @@ export const routes: Routes = [
         loadChildren: () => import('./feature/checkout/checkout.module').then((m) => m.CheckoutModule),
         canActivate: [authGuard]
       },
+      {
+        path: 'search',
+        loadChildren: () => import('./feature/search/search.module').then((m) => m.SearchModule),
+      },
     ]
   },
   {

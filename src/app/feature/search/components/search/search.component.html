@@ -1,0 +1,85 @@
+<div class="grid m-0">
+  <div class="col-2 bg-gray-200">
+    <div class="px-3 mt-2">
+      <p class="font-semibold text-xl">FILTERS</p>
+      <p-divider></p-divider>
+      <div>
+        <p class="font-semibold mt-3 text-lg">Price Range(AUD)</p>
+        <p-divider></p-divider>
+        <div class="mt-2 flex align-items-center gap-3">
+          <div class="border-1 border-700 border-round p-1">
+            <p>${{rangeValues[0]}}</p>
+          </div>
+          <div class="w-8">
+            <p-slider [(ngModel)]="rangeValues" [range]="true"></p-slider>
+          </div>
+          <div class="border-1 border-700 border-round p-1">
+            <p>${{rangeValues[1]}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p class="font-semibold text-lg mt-3">Categories</p>
+        <p-divider></p-divider>
+        <div class="pl-3">
+          <p class="mt-2 cursor-pointer hover-color font-semibold">- Men</p>
+          <p class="mt-1 cursor-pointer hover-color font-semibold">- Women</p>
+          <p class="mt-1 cursor-pointer hover-color font-semibold">- Shoes</p>
+          <p class="mt-1 cursor-pointer hover-color font-semibold">- Bags</p>
+          <p class="mt-1 cursor-pointer hover-color font-semibold">- Watches</p>
+        </div>
+      </div>
+
+      <div>
+        <p class="font-semibold text-lg mt-3">Size</p>
+        <p-divider></p-divider>
+        <div class="grid pl-3">
+          <p class="col-6 mt-2 p-0 cursor-pointer hover-color font-semibold">- XXS</p>
+          <p class="col-6 mt-2 p-0 cursor-pointer hover-color font-semibold">- XS</p>
+          <p class="col-6 mt-1 p-0 cursor-pointer hover-color font-semibold">- S</p>
+          <p class="col-6 mt-1 p-0 cursor-pointer hover-color font-semibold">- M</p>
+          <p class="col-6 mt-1 p-0 cursor-pointer hover-color font-semibold">- L</p>
+          <p class="col-6 mt-1 p-0 cursor-pointer hover-color font-semibold">- XL</p>
+          <p class="col-6 mt-1 p-0 cursor-pointer hover-color font-semibold">- XXL</p>
+          <p class="col-6 mt-1 p-0 cursor-pointer hover-color font-semibold">- XXXL</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-10 px-3">
+    <div class="flex justify-content-center mt-2">
+      <p-inputGroup class="w-full md:w-9">
+        <input (keyup.enter)="onSearch()" type="text" pInputText placeholder="Search" [formControl]="searchInput" />
+        <button (click)="onSearch()" type="button" pButton icon="pi pi-search"
+          class="bg-primary-600 border-primary-600"></button>
+      </p-inputGroup>
+    </div>
+    <div class="block md:flex align-items-center gap-3 mt-2 boldDropDown">
+      <p class="text-600">Search results for <b class="text-xl text-900">"{{searchTerm}}"</b></p>
+      <div class="flex gap-2 border-1 border-400 border-round p-2 mt-2 md:mt-0">
+        <p>Sort by:</p>
+        <p-dropdown [options]="sortType" [showClear]="true" [(ngModel)]="selectedSortType" optionLabel="name"
+          placeholder="choose sort type" styleClass="border-0"></p-dropdown>
+      </div>
+    </div>
+
+    <ng-container *ngIf="pageState$ | async as currentState">
+      <ng-container [ngSwitch]="currentState">
+        <ng-container *ngSwitchCase="ePageState.LOADING">
+          <app-loading-list></app-loading-list>
+        </ng-container>
+        <ng-container *ngSwitchCase="ePageState.SUCCESS">
+          <app-list-products [products]="searchedData"></app-list-products>
+        </ng-container>
+        <ng-container *ngSwitchCase="ePageState.ERROR">
+          <app-error-on-load></app-error-on-load>
+        </ng-container>
+        <ng-container *ngSwitchCase="ePageState.EMPTY">
+          <app-empty-list></app-empty-list>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
