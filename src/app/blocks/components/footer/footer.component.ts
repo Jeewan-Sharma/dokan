@@ -7,7 +7,7 @@ import { ASSETS } from '@core/consts';
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent implements OnInit {
-  readonly ASSETS = ASSETS
+  readonly ASSETS = ASSETS;
   constructor() { }
   ngOnInit(): void {
 

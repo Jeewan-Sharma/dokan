@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EPageState } from '@core/enums';
 import { IProducts } from '@core/models';
-import { LoaderService, ProductsService, ToastService } from '@core/services';
+import { LoaderService, LocalHostDataService, ProductsService, ToastService } from '@core/services';
 import { BehaviorSubject } from 'rxjs';
-
 interface sortType {
   name: string;
   code: string;
 }
-
-
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -21,9 +18,10 @@ export class SearchComponent implements OnInit {
 
   searchInput = new FormControl<string | null>(null);
 
+  rangeValues: number[] = [0, 100];
+
   // for using value
   searchTerm: string = '';
-
   sortType: sortType[] = [
     { name: 'Recommended', code: 'Recommended' },
     { name: 'New Arrivals', code: 'New Arrivals' },
@@ -47,33 +45,35 @@ export class SearchComponent implements OnInit {
     private _loaderService: LoaderService,
     private _productService: ProductsService,
     private _toastService: ToastService,
+    private _router: Router,
+    private _localHostDataService: LocalHostDataService,
   ) { }
 
-  ngOnInit() {
-    this.filterBySearch()
-    this.onSearch();
+  async ngOnInit() {
+    this.getSearchTerm();
+    this.filterBySearchTerm()
   }
-  async onSearch() {
+
+  async getSearchTerm() {
     this.searchTerm = await this._activatedRoute.snapshot.queryParams['searchTerm'];
     this.searchInput.patchValue(this.searchTerm);
   }
 
-  async filterBySearch() {
-    await this.getProductList();
-    this.searchedData = await this.apiData.filter(
-      (u: IProducts) => u.title.toLowerCase().includes(this.searchTerm.toLowerCase()),
-    );
-    if (this.searchedData.length === 0) {
-      this.pageState$.next(this.ePageState.EMPTY);
-    }
-  }
-
-  async getProductList() {
+  async filterBySearchTerm() {
     try {
       this.pageState$.next(this.ePageState.LOADING);
       this._loaderService.showLoader()
-      this.apiData = await this._productService.getProductList(this.searchTerm);
-      this.pageState$.next(this.ePageState.SUCCESS);
+      this.apiData = await this._productService.getProductList('');
+
+      this.searchedData = await this.apiData.filter(
+        (u: IProducts) => u.title.toLowerCase().includes(this.searchTerm.toLowerCase()),
+      );
+      if (this.searchedData.length === 0) {
+        this.pageState$.next(this.ePageState.EMPTY);
+      } else {
+        this.pageState$.next(this.ePageState.SUCCESS);
+      }
+
     } catch (err) {
       this._toastService.showError({
         message: "Error in loading Products",
@@ -85,4 +85,13 @@ export class SearchComponent implements OnInit {
     }
   }
 
+  onSearch() {
+    if (this.searchInput.value === null || '') {
+      return;
+    }
+    this._router.navigate(['search'], { queryParams: { searchTerm: this.searchInput.value } })
+    this._localHostDataService.setRecentSearches(this.searchInput.value)
+    this.searchTerm = this.searchInput.value;
+    this.filterBySearchTerm();
+  }
 }

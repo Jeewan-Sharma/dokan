@@ -9,9 +9,11 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
+import { SliderModule } from 'primeng/slider';
+import { DividerModule } from 'primeng/divider';
 import { ListProductsComponent, LoadingListComponent, DetailsViewComponent, ErrorOnLoadComponent, EmptyListComponent } from '@shared/components';
 
-const PrimeNgModules = [InputGroupModule, ButtonModule, InputTextModule, DropdownModule]
+const PrimeNgModules = [InputGroupModule, ButtonModule, InputTextModule, DropdownModule, SliderModule, DividerModule]
 
 @NgModule({
   declarations: [

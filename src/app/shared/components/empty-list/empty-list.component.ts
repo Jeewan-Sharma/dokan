@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ASSETS } from '@core/consts';
 
 @Component({
   selector: 'app-empty-list',
@@ -8,5 +9,5 @@ import { Component } from '@angular/core';
   styleUrl: './empty-list.component.scss'
 })
 export class EmptyListComponent {
-
+  readonly ASSETS = ASSETS;
 }

@@ -10,9 +10,10 @@ const IMAGES = {
   MEN: `${IMAGE_BASE}/modals/men.png`,
   EMPTY_CART: `${IMAGE_BASE}/emptyCart.png`,
   AUTH_BACKGROUND: `${IMAGE_BASE}/authBackground.png`,
-  AUTH_BANNER: `${IMAGE_BASE}/authBanner.jpg`,
   ERROR: `${IMAGE_BASE}/error.png`,
-  SUCCESS: `${IMAGE_BASE}/success.png`
+  SUCCESS: `${IMAGE_BASE}/success.png`,
+  ERROR_ON_LOAD: `${IMAGE_BASE}/errorOnLoad.png`,
+  EMPTY_FILE: `${IMAGE_BASE}/emptyFile.png`
 }
 
 // Main Export

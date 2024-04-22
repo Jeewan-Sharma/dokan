@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ASSETS } from '@core/consts';
 
 @Component({
   selector: 'app-error-on-load',
@@ -8,5 +9,7 @@ import { Component } from '@angular/core';
   styleUrl: './error-on-load.component.scss'
 })
 export class ErrorOnLoadComponent {
+
+  readonly ASSETS = ASSETS;
 
 }
